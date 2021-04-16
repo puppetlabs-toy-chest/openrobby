@@ -31,7 +31,3 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-import_config "../../ldap_wrapper/config/#{Mix.env}.exs"
-import_config "../../ldap_write/config/#{Mix.env}.exs"
-import_config "../../ldap_search/config/#{Mix.env}.exs"
-import_config "../../sms_code/config/#{Mix.env}.exs"

@@ -91,7 +91,7 @@ defmodule LdapWrite.Worker do
     for {attribute, new_val} <- change_map do
       old_val = Map.get(model, attribute)
       ldap_attr = attribute |> to_charlist
-      ldap_operation(ldap_attr, old_val, new_val)
+      ldap_operation(ldap_attr, nil, old_val, new_val)
     end
   end
 
