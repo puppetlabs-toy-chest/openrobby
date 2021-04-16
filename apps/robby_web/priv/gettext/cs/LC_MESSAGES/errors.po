@@ -1,0 +1,97 @@
+## `msgid`s in this file come from POT (.pot) files. Do not add, change, or
+## remove `msgid`s manually here as they're tied to the ones in the
+## corresponding POT file (with the same domain). Use `mix gettext.extract
+## --merge` or `mix gettext.merge` to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Jazyk: cs\n"
+
+msgid "can't be blank"
+msgstr "nesmí být prázdný"
+
+msgid "is invalid"
+msgstr "je neplatný"
+
+msgid "has invalid format"
+msgstr "má neplatný formát"
+
+msgid "has an invalid entry"
+msgstr "má neplatnou položku"
+
+msgid "is reserved"
+msgstr "je rezervován"
+
+msgid "does not match confirmation"
+msgstr "se neshoduje s potvrzením"
+
+msgid "is still associated to this entry"
+msgstr "je stále vázán k této položce"
+
+msgid "are still associated to this entry"
+msgstr "jsou stále vázány k této položce"
+
+msgid "should be %{count} character(s)"
+msgid_plural "by měl mít %{count} znaků"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "should have %{count} item(s)"
+msgid_plural "by měl mít %{count} položek"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "should be at least %{count} character(s)"
+msgid_plural "by měl mít alespoň %{count} znaků"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "should have at least %{count} item(s)"
+msgid_plural "by měl mít alespoň %{count} položek"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "should be at most %{count} character(s)"
+msgid_plural "by měl mít nanejvýš %{count} znaků"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "should have at most %{count} item(s)"
+msgid_plural "by měl mít nanejvýš %{count} položek"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "must be less than %{count}"
+msgid_plural "musí být menší než %{count}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "must be greater than %{count}"
+msgid_plural "musí být větší než %{count}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "must be less than or equal to %{count}"
+msgid_plural "musí být menší nebo rovno %{count}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "must be greater than or equal to %{count}"
+msgid_plural "musí být větší nebo rovno %{count}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "must be equal to %{count}"
+msgid_plural "musí být rovno %{count}"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""

@@ -1,0 +1,10 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <img src="/images/confluence.png" alt="Confluence logo"></img>
+    <a href="https://your-confluence-url-here/users/viewuserprofile.action?username=<%= @value %>">Confluence</a>
+  </div>
+  <div class="value">
+    <img src="/images/jira.png" alt="Jira logo"></img>
+    <a href="https://your-jira-url-here/secure/ViewProfile.jspa?name=<%= @value %>">Jira</a>
+  </div>
+</div>

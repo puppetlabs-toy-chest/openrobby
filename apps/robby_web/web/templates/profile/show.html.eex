@@ -1,0 +1,60 @@
+<article class="container-fluid">
+  <div class="row">
+    <section class="col-md-4 col-md-offset-2">
+      <%= render_attribute(:jpegPhoto, @user_profile) %>
+      <% current_user_dn = @conn.assigns.current_user.dn %>
+      <% user_profile_dn = @conn.assigns.user_profile.dn %>
+      <%= unless current_user_dn == user_profile_dn || is_nil(user_profile_dn), do: render("photo_complaint.html", conn: @conn, id: @conn.params["id"]) %>
+    </section>
+    <section class="col-md-4">
+      <%= render_attributes([:cn, :title, :personalTitle, :pseudonym, :pronoun, :mail, :telephoneNumber, :mobile, :uid, :physicalDeliveryOfficeName], @user_profile) %>
+    </section>
+
+  </div>
+
+  <div class="row">
+    <hr>
+  </div>
+
+  <div class="row">
+    <section class="col-md-4 col-md-offset-2">
+      <%= render_attributes([:ou], @user_profile) %>
+      <%= render_attributes([:projects], @user_profile) %>
+      <%= render_attribute(:manager, @manager) %>
+      <%= render_attribute(:direct_reports, @reports) %>
+    </section>
+    <section class="col-md-4">
+      <%= percent_newer_than(@conn, @user_profile) %><%= gettext("% of the organization is newer") %>
+      <br>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%=percent_newer_than(@conn, @user_profile)%>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%=percent_newer_than(@conn, @user_profile)%>%">
+          <%=percent_newer_than(@conn, @user_profile)%>%
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="row"><hr></div>
+  <div class="row">
+    <section class="col-md-4 col-md-offset-2">
+      <h3><%= gettext("Preferences") %></h3>
+      <%= render_attributes([:bribeMeWith, :dietaryRestrictions, :shirtSize], @user_profile) %>
+    </section>
+    <section class="col-md-4">
+      <h3><%= gettext("Community") %></h3>
+      <%= render_attributes([:github, :twitterHandle, :steamAccount, :ircNickname, :slackUsername, :labeledURI], @user_profile) %>
+    </section>
+  </div>
+  <div class="row"><hr></div>
+  <div class="row">
+    <section class="col-md-4 col-md-offset-2">
+      <h3><%= gettext("Background") %></h3>
+      <%= render_attributes([:interestingFact, :languages, :skills], @user_profile) %>
+    </section>
+
+
+    <section class="col-md-4">
+      <h3><%= gettext("Misc") %></h3>
+      <%= render_attributes([:googleGroups, :sshPublicKey, :employeeType, :id, :macAddress], @user_profile) %>
+    </section>
+  </div>
+</article>

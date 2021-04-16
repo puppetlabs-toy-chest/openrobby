@@ -1,0 +1,13 @@
+<div class="col-md-8 col-md-offset-2">
+<%= render RobbyWeb.SharedView, "password_criteria.html", conn: @conn %>
+<%= form_for @conn, password_change_path(@conn, :create), [as: :password_change, method: :post, id: "formCheckPassword"], fn f -> %>
+  <div class="form-group">
+    <%= label f, :old_password, gettext("Enter old password") %>
+    <%= password_input f, :old_password, placeholder: gettext("Old Password"), class: "form-control" %>
+  </div>
+  <hr>
+  <%= render RobbyWeb.SharedView, "password.html", f: f, conn: @conn %>
+  <div id="messages"></div>
+  <%= submit gettext("Submit"), class: "btn btn-primary" %>
+<% end %>
+</div>

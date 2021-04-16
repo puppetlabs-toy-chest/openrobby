@@ -1,0 +1,23 @@
+<h2>Show user</h2>
+
+<ul>
+
+  <li>
+    <strong>Dn:</strong>
+    <%= @user.dn %>
+  </li>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+
+  <li>
+    <strong>Salt:</strong>
+    <%= @user.salt %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: user_path(@conn, :edit, @user) %>
+<%= link "Back", to: user_path(@conn, :index) %>

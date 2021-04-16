@@ -1,0 +1,10 @@
+<div class="<%= @type %>">
+  <div class="attribute">
+    <strong> <%= @type %> </strong>
+  </div>
+  <div class="value">
+    <%= for {person} <- Map.drop(@user_profile, [:__struct__, :__meta__, :hasSubordinates]) do %>
+    <a href="link_to_person"><%= person %></a><br>
+    <% end %>
+  </div>
+</div>

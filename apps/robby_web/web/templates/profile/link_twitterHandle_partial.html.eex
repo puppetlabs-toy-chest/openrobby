@@ -1,0 +1,6 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <i class="fa fa-twitter fa-lg"></i>
+    <a href="http://twitter.com/<%= @value %>"><%= @value %></a>
+  </div>
+</div>

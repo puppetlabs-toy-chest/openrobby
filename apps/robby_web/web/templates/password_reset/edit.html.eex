@@ -1,0 +1,8 @@
+<div class="col-md-8 col-md-offset-2">
+  <h1>Reset your password</h1>
+  <%= render RobbyWeb.SharedView, "password_criteria.html", conn: @conn%>
+  <%= form_for @conn, password_reset_path(@conn, :update, @conn.params["id"]), [as: :password_reset, method: :put], fn f -> %>
+    <%= render RobbyWeb.SharedView, "password.html", f: f, conn: @conn %>
+    <%= submit gettext("Submit"), class: "btn btn-primary" %>
+  <% end %>
+</div>

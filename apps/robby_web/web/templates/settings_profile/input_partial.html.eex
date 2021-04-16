@@ -1,0 +1,7 @@
+<div class="<%= @attribute %> input-group">
+  <span class="input-group-addon">
+    <%= label @form, @attribute, Gettext.gettext(RobbyWeb.Gettext, to_string(@attribute))%> 
+  </span> 
+  <%= text_input @form, @attribute, class: "form-control" %>
+</div>
+<br>

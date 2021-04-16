@@ -1,0 +1,7 @@
+# Files and directories to ignore when using ag
+# https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
+
+_build
+*.map
+apps/robby_web/node_modules
+apps/robby_web/priv/static

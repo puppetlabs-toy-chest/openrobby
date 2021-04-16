@@ -1,0 +1,114 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+
+  <%= if f.errors != [] do %>
+    <div class="alert alert-danger">
+    <p><%= gettext("Oops, something went wrong! Please check the errors below:") %></p>
+      <ul>
+        <%= for {attr, message} <- f.errors do %>
+          <li><%= humanize(attr) %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="containter-fluid">
+    <div class="row">
+      <div class="col-md-2" %></div>
+      <div class="col-md-4">
+        <div class="form-group">
+        <script>
+function uploadFile_onChange(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('.profile_picture').attr('src', e.target.result);
+
+
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+        </script>
+          <label for="profile_jpegPhoto"><%= gettext("Upload a photo") %></label>
+          <%= RobbyWeb.ProfileView.render_attribute(:jpegPhoto, @user_profile)  %>
+          <span class="btn btn-default btn-file">
+            <%= gettext("Browse...") %>
+            <%= file_input f, :jpegPhoto, class: "form-group", accept: ".jpg", onchange: "uploadFile_onChange(this);"%>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+          <%= render_inputs(f, [:cn, :title, :personalTitle, :pseudonym], @user_profile) %>
+          Respecting someone means also respecting their <a href="https://blog.cultureamp.com/why-sharing-preferred-gender-pronouns-at-work-matters" target="_blank">pronouns</a>. Please help us normalize the practice of sharing pronouns at the organization by adding yours.
+         <br></br>
+          <%= render_inputs(f, [:pronoun, :mail, :telephoneNumber, :mobile, :l, :st, :stateOrProvincename ], @user_profile) %>
+      </div>
+      <div class="col-md-2"></div>
+    </div> <!-- row -->
+
+    <div class="row"><hr></div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+          <%= render_inputs(f, [:ou, :projects], @user_profile) %>
+      </div>
+      <div class="col-md2"></div>
+    </div> <!-- row -->
+
+    <div class="row"><hr></div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <h3><%= gettext("Preferences") %></h3>
+        <%= render_inputs(f, [:bribeMeWith, :dietaryRestrictions, :shirtSize], @user_profile) %>
+      </div>
+      <div class="col-md-4">
+        <h3><%= gettext("Community") %></h3>
+        <%= render_inputs(f, [:github, :twitterHandle, :steamAccount, :ircNickname, :slackUsername, :labeledURI], @user_profile) %>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row"><hr></div>
+
+    <div class="row">
+      <div class ="col-md-2"></div>
+      <div class="col-md-4">
+        <h3><%= gettext("Background") %></h3>
+        <%= render_inputs(f, [:interestingFact, :languages, :skills], @user_profile) %>
+      </div>
+      <div class="col-md-4">
+        <h3><%= gettext("Misc") %></h3>
+        <%= render_inputs(f, [:sshPublicKey], @user_profile) %>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <div class="row"><hr></div>
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <h3><%= gettext("Please enter your password to make changes") %></h3>
+        <div id="fake-user-name-holder">
+          <!-- 1Password puts the user name in whatever text field comes before
+          the password field, e.g. the SSH public key field. -->
+          <input type="text" name="fake-user-name" tabindex="-1">
+        </div>
+        <div class="form-group">
+          <%= label f, :password, gettext("Password"), class: "hidden"%>
+          <%= password_input f, :password, placeholder: gettext("Password"), class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= submit gettext("Submit"), class: "btn btn-primary" %>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+
+  </div> <!-- end container-fluid -->
+<% end %>

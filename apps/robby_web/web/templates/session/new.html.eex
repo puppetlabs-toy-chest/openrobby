@@ -1,0 +1,13 @@
+<h1><%= gettext("Log in") %></h1>
+
+<%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
+  <div class="form-group">
+    <%= text_input f, :user, placeholder: gettext("User"), class: "form-control", title: "Use your organization login." %>
+  </div>
+  <div class="form-group">
+    <%= password_input f, :password, placeholder: gettext("Password"), class: "form-control" %>
+  </div>
+  <%= submit gettext("Log in"), class: "btn btn-primary" %>
+  &nbsp;
+  <%= link gettext("Forgot Password?"), to: password_reset_path(@conn, :new) %>
+<% end %>

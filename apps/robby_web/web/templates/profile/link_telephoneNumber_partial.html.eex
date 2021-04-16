@@ -1,0 +1,6 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <i class="fa fa-phone"></i>
+    <a href="tel:<%= @value %>"><%= @value %></a>
+  </div>
+</div>

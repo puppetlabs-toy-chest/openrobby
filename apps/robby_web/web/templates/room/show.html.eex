@@ -1,0 +1,11 @@
+<h2><%= @room.name %></h2>
+<p>Owner: <%= link @owner.cn, to: profile_path(@conn, :show, @owner.uid) %></p>
+
+<section id="messages-container" data-id="<%=@room.id%>">
+</section>
+<section>
+  <input id="message-input" type="text">
+</section>
+
+
+<%= link "Back", to: room_path(@conn, :index) %>

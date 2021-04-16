@@ -1,0 +1,8 @@
+<p align=center>
+  <h4><%= gettext("Your All-Time Average:") %> <%= @score %>% </h4></p>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="<%=@score%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@score%>%;">
+      <span class="sr-only"><%=@score%><%= gettext("% Correct") %></span>
+    </div>
+  </div>
+  <p align="right"><b><%= link "Leaderboard", to: name_game_path(@conn, :leaderboard) %>

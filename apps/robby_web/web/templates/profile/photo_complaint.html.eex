@@ -1,0 +1,5 @@
+<div style="padding-top: 20px;">
+  <%= form_for RobbyWeb.Profile.changeset(%RobbyWeb.Profile{}), profile_path(@conn, :photo_complaint, @id), [as: :photo_complaint], fn _f -> %>
+  <%= submit gettext("Request a better picture"), class: "btn btn-default btn-photo-complaint" %>
+  <% end %>
+</div>

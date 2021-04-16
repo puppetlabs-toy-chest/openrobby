@@ -1,0 +1,33 @@
+<%= if @conn.assigns.current_user do %>
+  <div class="row"><center>
+    <div class="col-md-8 col-md-offset-1">
+      <label for="search-input" class="hidden"><%= gettext("Search") %></label>
+      <input id="search-input" width="100%" type="search" placeHolder="<%= gettext("Search") %>" class="form-control input-lg"></input>
+    </div>
+    <div class="col-md-2">
+      <%= render "sort_by_button_partial.html", conn: @conn %>
+    </div>
+  </div>
+  <ul class="directory" aria-live="polite">
+    <%= for user <- @users do %>
+      <li class="directory-entry" id="<%= String.replace(user.uid, ".", "_") %>">
+        <figure class="thumbnail">
+          <a href="<%=profile_path @conn, :show, user.uid%>">
+            <div class="profile-pic medium" style="background-image: url(<%= get_photo_url(user.uid, @conn.assigns.current_user) %>)">
+            </div>
+            <figcaption class="caption">
+              <strong><%=user.cn%></strong>
+              <br>
+              <small><%=user.title%></small>
+            </figcaption>
+          </a>
+        </figure>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="jumbotron">
+    <h2><%= gettext("Welcome to Robby!") %></h2>
+    <p class="lead"><%= gettext("Now under active development") %><br/><%= gettext("New features will be deployed periodically") %><br/><%= gettext("Log in to view") %></p>
+  </div>
+<% end %>

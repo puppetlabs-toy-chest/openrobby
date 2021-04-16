@@ -1,0 +1,89 @@
+###############################################################################
+#
+# Sample dev.exs configuration file
+#
+# When developing locally, you'll need a dev.exs file in order to access
+# external resources (e.g. LDAP, Sendgrid, etc.)
+#
+# Copy this file, save as `dev.exs` and replace with values that will
+# allow you to access the systems Robby needs in order to run.
+#
+# Note:  You may need to update other applications in the umbrella app as well.
+# Check the config files under the following Robby applications:
+#   `apps/ldap_search`
+#   `apps/ldap_write`
+#   `apps/ldap_wrapper`
+#   `apps/sms_code`
+#
+###############################################################################
+use Mix.Config
+
+# For development, we disable any cache and enable
+# debugging and code reloading.
+#
+# The watchers configuration can be used to run external
+# watchers to your application. For example, we use it
+# with brunch.io to recompile .js and .css sources.
+config :robby_web, RobbyWeb.Endpoint,
+  http: [port: 4000],
+  debug_errors: true,
+  code_reloader: true,
+  cache_static_lookup: false,
+  check_origin: false,
+  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin"]]
+
+# Watch static and templates for browser reloading.
+config :robby_web, RobbyWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{web/views/.*(ex)$},
+      ~r{web/templates/.*(eex)$}
+    ]
+  ]
+
+# Do not include metadata nor timestamps in development logs
+config :logger, :console, format: "[$level] $message\n"
+
+# Set a higher stacktrace during development.
+# Do not configure such in production as keeping
+# and calculating stacktraces is usually expensive.
+config :phoenix, :stacktrace_depth, 20
+
+# Configure your database
+config :robby_web, RobbyWeb.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: :erlang.element(1, System.cmd("whoami", [])) |> String.strip,
+  password: "postgres",
+  database: "robby_web_dev",
+  hostname: "localhost",
+  pool_size: 10
+
+config :robby_web, RobbyWeb.LdapRepo,
+  adapter: Ecto.Ldap.Adapter,
+  hostname: "ldap.example.com",
+  base: "dc=example,dc=com",
+  port: 636,
+  ssl: true,
+  user_dn: "uid=#{System.get_env("ROBBY_LDAP_USERNAME")},ou=users,dc=example,dc=com",
+  password: System.get_env("ROBBY_LDAP_PASSWORD"),
+  pool_size: 1
+
+
+# Configure Mailer
+# Ignore this if you don't care about resetting passwords.
+config :robby_web, RobbyWeb.Emailer,
+  server: "smtp.sendgrid.net",
+  port: 587,
+  username: "robbylol",
+  password: "put_password_here",
+  ssl: :false,
+  tls: :always,
+  auth: :always
+
+config :ex_aws,
+  adapter: ExAws,
+  s3_adapter: ExAws.S3,
+  access_key_id: "SECRET_ACCESS_ID",
+  secret_access_key: "SECRET_ACCESS_KEY",
+  region: "us-west-2"

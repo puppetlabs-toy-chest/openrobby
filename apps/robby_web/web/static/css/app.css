@@ -1,0 +1,328 @@
+.logout-link {
+  display:block;
+  padding:3px 20px;
+  clear:both;
+  font-weight:400;
+  line-height:1.42857143;
+  color:#333;
+  white-space:nowrap
+}
+
+.logout-link:hover,
+.logout-link:focus {
+  text-decoration:none;
+  color:#262626;
+  background-color:#f5f5f5
+}
+
+input[type=radio].css-checkbox {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height:1px;
+  width:1px;
+  margin:-1px; padding:1; border:0;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+    padding-left:40px;
+    display:inline-block;
+    white-space: nowrap;
+    line-height:30px;
+    background-size:30px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:25px;
+    vertical-align:middle;
+    cursor:pointer;
+
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+  background-position: 0 -30px;
+}
+
+label.css-label {
+  background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_b7cbb496d72400d4fe9b79cc10fca3f1.png);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+fieldset label{ margin:0 20px; }
+
+#fake-user-name-holder {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Format Profile picture */
+.profile_picture {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+.btn-photo-complaint {
+  width: 200px;
+}
+
+/* Space out content a bit */
+body, form, ul, table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Phoenix flash messages */
+.alert:empty { display: none; }
+
+/* Phoenix inline forms in links and buttons */
+form.link, form.button {
+  display: inline;
+}
+
+/* Custom page header */
+.header {
+  background: linear-gradient(to bottom, #47456e 0%, #393758 100%);
+  border-bottom: 1px solid #e5e5e5;
+  display: block;
+  padding-top: 40px;
+}
+
+.logo {
+  width: 300px;
+  height: 105px;
+  display: inline-block;
+  margin-bottom: 1em;
+  background-size: 300px 105px;
+}
+
+.value {
+  display:inline;
+}
+.type {
+  display:inline;
+  font-weight: bold;
+}
+.attribute {
+  display:inline;
+}
+.profile {
+  padding: 10px;
+}
+.attribute_list li {
+  display: block;
+  list-style-type: none;
+}
+
+/* Don't display entire SSH public key. This still allows copy and paste. */
+.attribute_list.sshPublicKey li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.medium {
+  width: 192px;
+  height: 192px;
+  background-size: cover;
+  background-position: center;
+}
+
+.large {
+  width: 266px;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+}
+.profile-pic {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  margin: 3px auto 5px auto;
+  pointer-events: none;
+}
+
+/* resize the profile pics in the game proportionally */
+img.profile-pic.large {
+  width: auto;
+  height: auto;
+  max-width: 266px;
+  max-height: 280px;
+}
+
+ul.directory {
+  list-style: none;
+  display: inline-table;
+}
+
+ul.directory > li {
+  display: inline-block;
+  width: 211px;
+  margin: 5px 20px 0 0;
+  padding: 10px 0;
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+
+}
+.breadcrumb,
+.breadcrumb a {
+  background-color: transparent;
+  color: #fff;
+}
+
+.login-link,
+.login-link a{
+  float: right;
+  color: #fff;
+  margin-right: 15px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.caption > small {
+  font-size: 72%;
+}
+
+.flag-cs::after {
+  content: "\1F1E8\1F1FF";
+}
+
+.flag-de::after {
+  content: "\1F1E9\1F1EA";
+}
+
+.flag-en::after {
+  content: "\1F1FA\1F1F8";
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 35px 0;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+
+  .list {
+    text-indent: 10px;
+  }
+
+  .hidden {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+}
+
+/* Tooltip container */
+.more-info {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted;
+}
+
+/* Tooltip text */
+ .more-info-text {
+    visibility: hidden;
+    color: black;
+    width: 300px;
+    background: #fefefe;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    border:1px solid #ddd;
+    padding:15px;
+    box-shadow:0 1px 3px #ccc;
+    border:1px solid #ddd;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.more-info:hover .more-info-text {
+    visibility: visible;
+}
+
+.invalid {
+    line-height:24px;
+    color: #ff9933;
+    margin-left: 5%;
+    border: 1px solid red;
+}
+.valid {
+    line-height:24px;
+    color:#3a7d34;
+    margin-left: 5%;
+}
+
+#complexity-stats {
+  display: none;
+}

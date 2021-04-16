@@ -1,0 +1,4 @@
+<div class="<%= @type %>">
+  <span class="type"><%= Gettext.gettext(RobbyWeb.Gettext, to_string(@type)) %></span>
+  <span class="value"><%= @value %></span>
+</div>

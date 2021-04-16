@@ -1,0 +1,5 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <a href="mailto:<%= @value %>"><%= @value %></a>
+  </div>
+</div>

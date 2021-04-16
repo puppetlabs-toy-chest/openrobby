@@ -1,0 +1,10 @@
+<h1><%= gettext("Enter 2FA Code")%></h1>
+
+<p class="lead"><%= gettext("A code was just sent to the mobile you have on file. Please enter it below.") %></p>
+
+<%= form_for @conn, password_reset_sms_code_path(@conn, :create, @conn.params["password_reset_id"]), [as: :password_reset_sms_code], fn f -> %>
+  <div class="form-group">
+    <%= text_input f, :sms_code, placeholder: gettext("2FA Code"), pattern: "[0-9A-F]*", class: "form-control" %>
+  </div>
+  <%= submit gettext("Submit"), class: "btn btn-primary" %>
+<% end %>

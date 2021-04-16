@@ -1,0 +1,22 @@
+/_build
+/package-work
+/cover
+/deps
+erl_crash.dump
+*.ez
+.mix_tasks
+apps/*/rel
+/log
+.local.plt
+
+# Elixir language server. Used for Visual Studio and VS Code.
+.elixir_ls/
+
+# bundle install --deployment
+/vendor/
+/.bundle/
+
+# Vanagon
+/output/
+/vanagon_hosts.log
+/ext/

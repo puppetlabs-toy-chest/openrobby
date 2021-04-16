@@ -1,0 +1,4 @@
+<div class="edit_button">
+  <%= link gettext("Edit"), class: "btn btn-default", to: settings_profile_path(@conn, :edit) %>
+</div>
+<%= render RobbyWeb.ProfileView, "show.html", assigns %>

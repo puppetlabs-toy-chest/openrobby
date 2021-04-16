@@ -1,0 +1,11 @@
+<div class="<%= @type %>">
+  <div class="attribute">
+    <strong><%= Gettext.gettext(RobbyWeb.Gettext, to_string(@type)) %></strong>
+  </div>
+
+  <ul class="attribute_list <%= @type %>">
+  <%= for value <- @value do %>
+    <li><code><%= value %></code></li>
+  <% end %>
+  </ul>
+</div>

@@ -1,0 +1,58 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          robby3
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Robby 3
+### END INIT INFO
+
+set -e
+
+. /lib/lsb/init-functions
+
+NAME=robby3
+DESC="Robby 3"
+PIDFILE=/opt/$NAME/erlang.pid
+HOME="/opt/$NAME"
+export HOME
+
+do_start() {
+  start-stop-daemon -S -p $PIDFILE -q --oknodo --startas /opt/$NAME/bin/robby3 -- start
+}
+
+do_stop() {
+  /opt/$NAME/bin/robby3 stop
+  start-stop-daemon -K -p $PIDFILE -q --oknodo --retry 5
+}
+
+case "$1" in
+    start)
+      do_start
+      log_daemon_msg "Starting $DESC" "$NAME"
+      case "$?" in
+        0|1) log_end_msg 0 ;;
+        2) log_end_msg 1 ;;
+      esac
+      ;;
+    stop)
+      log_daemon_msg "Stopping $DESC" "$NAME"
+      do_stop
+      case "$?" in
+        0|1) log_end_msg 0 ;;
+        2) log_end_msg 1 ;;
+      esac
+      ;;
+    restart)
+      do_stop
+      do_start
+      ;;
+    status)
+      status_of_proc -p $PIDFILE
+      ;;
+    *)
+      /opt/$NAME/bin/robby3 $1
+      ;;
+esac

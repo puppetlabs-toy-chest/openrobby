@@ -1,0 +1,2 @@
+<h1><%= gettext("Reset Link Sent") %></h1>
+<p><%= gettext("If we were able to locate your user record, we sent an email to the address you provided.") %></p>

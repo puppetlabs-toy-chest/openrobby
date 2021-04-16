@@ -1,0 +1,23 @@
+<h2>Show password policy</h2>
+
+<ul>
+
+  <li>
+    <strong>Object class:</strong>
+    <%= @password_policy.object_class %>
+  </li>
+
+  <li>
+    <strong>Min length:</strong>
+    <%= @password_policy.min_length %>
+  </li>
+
+  <li>
+    <strong>Min char classes:</strong>
+    <%= @password_policy.min_char_classes %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: password_policy_path(@conn, :edit, @password_policy) %>
+<%= link "Back", to: password_policy_path(@conn, :index) %>

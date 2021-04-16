@@ -1,0 +1,3 @@
+<div class="<%= @type %>">
+  <img class="profile_picture" src= "data:image/jpeg;base64,<%= Base.encode64(@value) %>" width="100%" alt="Profile Picture">
+</div>

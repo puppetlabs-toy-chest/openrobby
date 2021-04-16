@@ -1,0 +1,14 @@
+<div class="sort_by_buttons">
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= gettext("Sort By") %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link gettext("Oldest Hire First"), to:  page_path(@conn, :index, sort_by: :startDate, sort_reverse: false) %></li>
+      <li><%= link gettext("Newest Hire First"), to:  page_path(@conn, :index, sort_by: :startDate, sort_reverse: true) %></li>
+      <li><%= link gettext("A-Z"), to:  page_path(@conn, :index, sort_by: :cn, sort_reverse: false) %></li>
+      <li><%= link gettext("Z-A"), to:  page_path(@conn, :index, sort_by: :cn, sort_reverse: true) %></li>
+    </ul>
+  </div>
+</div>
+<br>

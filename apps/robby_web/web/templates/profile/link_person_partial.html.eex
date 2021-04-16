@@ -1,0 +1,8 @@
+<div class="<%= @type %>">
+  <div class="attribute">
+    <strong><%= Gettext.gettext(RobbyWeb.Gettext, to_string(@type)) %></strong>
+  </div>
+  <div class="value">
+    <%= link @name, to: profile_path(RobbyWeb.Endpoint, :show, @uid) %>
+  </div>
+</div>

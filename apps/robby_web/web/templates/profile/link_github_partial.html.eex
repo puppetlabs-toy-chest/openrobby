@@ -1,0 +1,6 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <i class="fa fa-github fa-lg"></i>
+    <a href="http://github.com/<%= @value %>"><%= @value %></a>
+  </div>
+</div>

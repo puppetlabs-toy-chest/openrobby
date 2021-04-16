@@ -1,0 +1,14 @@
+<div class=container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Edit Profile</h2>
+      <%= button "Cancel", to: settings_profile_path(@conn, :show), method: :get, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+<%= render "form.html", user_profile: @user_profile,
+                        changeset: @changeset,
+                        single_fields: @single_fields,
+                        array_fields: @array_fields,
+                        action: settings_profile_path(@conn, :update) %>

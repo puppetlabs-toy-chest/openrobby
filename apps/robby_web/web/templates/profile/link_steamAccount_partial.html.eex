@@ -1,0 +1,6 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <i class="fa fa-steam fa-lg"></i>
+    <a href="https://steamcommunity.com/id/<%= @value %>"><%= @value %></a>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="<%= Gettext.get_locale(RobbyWeb.Gettext) || "en" %>">
+  <%= render RobbyWeb.SharedView, "html_header.html", title: assigns[:title] %>
+  <body>
+    <div class="container-fluid">
+      <%= if @current_user do %>
+  <script>
+window.userToken = "<%= Phoenix.Token.sign(@conn, "user_token_salt", %{user_id: @conn.assigns.current_user.id}) %>";
+  </script>
+        <div class="row">
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <header class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only"><%= gettext("Toggle navigation") %></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </header>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><%= link gettext("About"), to: page_path(@conn, :about), class: "navbar-link"%></li>
+                  <li><%= link gettext("Directory"), to: page_path(@conn, :index), class: "navbar-link"%></li>
+                  <li><%= link gettext("Who is that?"), to: name_game_path(@conn, :new), class: "navbar-link" %></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= gettext("Office Maps") %><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link "Headquarters", to: maps_path(@conn, :show, "headquarters") %></li>
+                    </ul>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= gettext("My Profile")%><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link gettext("View Profile"), to: settings_profile_path(@conn, :show) %></li>
+                      <li><%= link gettext("Edit Profile"), to: settings_profile_path(@conn, :edit) %></li>
+                      <li><%= link gettext("Change Password"), to: password_change_path(@conn, :index) %></li>
+                      <li role="separator" class="divider"></li>
+                      <li><%= link gettext("Log out"), to: session_path(@conn, :delete, @current_user), method: "delete", class: "logout-link" %></li>
+                    </ul>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle flag-<%= Gettext.get_locale(RobbyWeb.Gettext)%>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                    <ul class="dropdown-menu">
+                      <%= for locale <- Gettext.known_locales(RobbyWeb.Gettext) do %>
+                        <li><%= link "", to: "?locale=#{locale}", class: "flag-#{locale}" %></li>
+                      <% end %>
+                    </ul>
+                  </li>
+                </ul>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+          </nav>
+        </div>
+      <% end %>
+    </div>
+    <main class="container-fluid">
+      <div class="row">
+        <header class="header">
+
+        <% today = DateTime.utc_now %>
+        <%= if today.day == 1 && today.month == 4 do %>
+
+          <a href="<%=page_path(@conn, :index)%>"><img class="logo" src="/images/clippy.png" alt="Robby Home"></a>
+          <% else %>
+          <a href="<%=page_path(@conn, :index)%>"><img class="logo" src="/images/robby.png" alt="Robby Home"></a>
+          <% end %>
+
+          <%= unless @current_user do %>
+            <span class="login-link"><%= link gettext("Log in"), to: session_path(@conn, :new), class: "navbar-link" %></span>
+          <% end%>
+        </header>
+        <div class="col-md-12">
+
+          <p class="alert alert-success" role="alert"><%= get_flash(@conn, :success) %></p>
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-warning" role="alert"><%= get_flash(@conn, :warning) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+          <%= render @view_module, @view_template, assigns %>
+        </div>
+      </div> <!-- /row -->
+    </main> <!-- /container -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

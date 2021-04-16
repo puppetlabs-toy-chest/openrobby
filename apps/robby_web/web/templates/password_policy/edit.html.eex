@@ -1,0 +1,6 @@
+<h2>Edit password policy</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: password_policy_path(@conn, :update, @password_policy) %>
+
+<%= link "Back", to: password_policy_path(@conn, :index) %>

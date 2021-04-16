@@ -1,0 +1,30 @@
+<h2>Listing password policies</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Object class</th>
+      <th>Min length</th>
+      <th>Min char classes</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for password_policy <- @password_policies do %>
+    <tr>
+      <td><%= password_policy.object_class %></td>
+      <td><%= password_policy.min_length %></td>
+      <td><%= password_policy.min_char_classes %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: password_policy_path(@conn, :show, password_policy), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: password_policy_path(@conn, :edit, password_policy), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: password_policy_path(@conn, :delete, password_policy), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New password policy", to: password_policy_path(@conn, :new) %>

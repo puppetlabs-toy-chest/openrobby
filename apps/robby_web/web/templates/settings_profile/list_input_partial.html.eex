@@ -1,0 +1,40 @@
+<div class="attribute-list input <%= @attribute %> ">
+  <script>
+    var counter = 0;
+    function add_item_at_end_of_<%= @attribute %>() {
+      counter ++;
+      var id_number = counter + <%= length(@value) %>;
+      var $label = $("<label>", {for: "profile_<%= @attribute %>_" + id_number, class: "hidden"}).text("profile_<%= @attribute %>_" + id_number);
+      var $input = $("<input>", {id: "profile_<%= @attribute %>_" + id_number, type: "text", class: "form-control", name: "profile[<%=@attribute%>][" + id_number +"]", value: "",});
+      var $remove = $("<button>", {type: "button", class: "btn btn-default", onclick: "remove_profile(\"<%=@attribute%>\"," + id_number + ");", html: '<i class="fa fa-times"></i>'}).attr("aria-label", "Remove");
+      var $span = $("<span>", {id: "profile_<%=@attribute%>_" + id_number + "_div", class: "list-input"});
+      var $input_group_div = $("<div>", {class: "input-group"});
+      var $btn_span = $("<span>", {class: "input-group-btn"});
+
+      $($btn_span).append($remove)
+      $($input_group_div).append($label).append($input).append($btn_span);
+      $($span).append($input_group_div)
+      $(<%= "profile_#{@attribute}_div"%>).append($span);
+    }
+    function remove_profile(attribute, element_id) {
+      $("#profile_" + attribute + "_" + element_id + "_div").remove();
+    }
+  </script>
+  <div id="profile_<%=@attribute%>_container">
+    <%= label @form, Gettext.gettext(RobbyWeb.Gettext, to_string(@attribute)) %>
+    <div id ="profile_<%=@attribute%>_div">
+      <%= for i <- 0..(length(@value)) do %>
+      <span id=<%="profile_#{@attribute}_#{i}_div"%> class="list_input">
+        <div class="input-group">
+          <label for=<%="profile_#{@attribute}_#{i}"%> class="hidden"><%="#{@attribute}_#{i}"%></label>
+          <%= text_input @form, @attribute, class: "form-control", value: Enum.at(@value, (i)), name: "profile[#{@attribute}][#{i}]", id: "profile_#{@attribute}_#{i}" %>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="remove_profile('<%=@attribute%>',<%=i%>);" aria-label="Remove"><i class="fa fa-times"></i></button>
+          </span>
+        </div>
+      </span>
+      <% end %>
+    </div>
+    <p><input type="button" class="btn btn-default" value="<%= gettext("Add") %>" onclick="add_item_at_end_of_<%=@attribute%>();" /></p>
+  </div>
+</div>

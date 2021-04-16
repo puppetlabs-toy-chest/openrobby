@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <h2>About Robby</h2>
+  <dl>
+    <dt>Version</dt>
+    <dd><%= @conn.assigns.robby_version %></dd>
+    <br />
+    <dt>Source Code</dt>
+    <dd>
+      <a href="https://github.com/puppetlabs/robby3">Robby3 on GitHub</a>
+    </dd>
+  </dl>
+</div>

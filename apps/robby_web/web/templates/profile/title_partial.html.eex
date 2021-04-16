@@ -1,0 +1,5 @@
+<div class="<%= @type %>">
+  <div class="value">
+    <h4> <%= @value %> </h4>
+  </div>
+</div>

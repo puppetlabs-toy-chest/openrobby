@@ -1,0 +1,416 @@
+## `msgid`s in this file come from POT (.pot) files. Do not add, change, or
+## remove `msgid`s manually here as they're tied to the ones in the
+## corresponding POT file (with the same domain). Use `mix gettext.extract
+## --merge` or `mix gettext.merge` to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/models/profile.ex:47
+msgid "bribeMeWith"
+msgstr "Bribe Me With"
+
+#: web/models/directory.ex:21 web/models/profile.ex:48
+msgid "cn"
+msgstr ""
+
+#: web/models/profile.ex:49
+msgid "dietaryRestrictions"
+msgstr "Food Restrictions"
+
+#: web/models/profile.ex:51
+msgid "dn"
+msgstr ""
+
+#: web/models/profile.ex:52
+msgid "employeeNumber"
+msgstr "Employee Number"
+
+#: web/models/profile.ex:50
+msgid "employeeType"
+msgstr ""
+
+#: web/models/profile.ex:53
+msgid "favouriteDrink"
+msgstr "Favorite Drink"
+
+#: web/models/profile.ex:54
+msgid "github"
+msgstr "GitHub Username"
+
+#: web/models/profile.ex:55
+msgid "googleGroups"
+msgstr "Google Groups"
+
+#: web/models/profile.ex:56
+msgid "hasSubordinates"
+msgstr ""
+
+#: web/models/profile.ex:57
+msgid "interestingFact"
+msgstr "Interesting Fact"
+
+#: web/models/profile.ex:58
+msgid "ircNickname"
+msgstr "IRC Nickname"
+
+#: web/models/profile.ex:59
+msgid "jpegPhoto"
+msgstr "Picture"
+
+#: web/models/profile.ex:60
+msgid "labeledURI"
+msgstr "Personal Site"
+
+#: web/models/profile.ex:61
+msgid "languages"
+msgstr "Languages"
+
+#: web/models/profile.ex:62
+msgid "mail"
+msgstr "Email"
+
+#: web/models/profile.ex:63
+msgid "manager"
+msgstr "Manager"
+
+#: web/models/profile.ex:64
+msgid "mobile"
+msgstr "Cell"
+
+#: web/models/profile.ex:66
+msgid "onCall"
+msgstr "On Call"
+
+#: web/models/profile.ex:67
+msgid "ou"
+msgstr "Department"
+
+#: web/models/profile.ex:68
+msgid "personalTitle"
+msgstr "Secondary Title"
+
+#: web/models/profile.ex:70
+msgid "projects"
+msgstr "Projects"
+
+#: web/models/profile.ex:71
+msgid "pronoun"
+msgstr "Pronouns"
+
+#: web/models/profile.ex:72
+msgid "pseudonym"
+msgstr "Nickname"
+
+#: web/models/profile.ex:73
+msgid "shirtSize"
+msgstr "Shirt Size"
+
+#: web/models/profile.ex:74
+msgid "skills"
+msgstr "Skills"
+
+#: web/models/profile.ex:76
+msgid "sshPublicKey"
+msgstr "SSH Public Key"
+
+#: web/models/profile.ex:77
+msgid "steamAccount"
+msgstr "Steam Account"
+
+#: web/models/profile.ex:78
+msgid "telephoneNumber"
+msgstr "Office Phone"
+
+#: web/models/directory.ex:24 web/models/profile.ex:79
+msgid "title"
+msgstr "Title"
+
+#: web/models/profile.ex:80
+msgid "twitterHandle"
+msgstr "Twitter Account"
+
+#: web/models/profile.ex:50
+msgid "direct_reports"
+msgstr "Direct Reports"
+
+#: web/models/directory.ex:22
+msgid "displayName"
+msgstr ""
+
+#: web/models/directory.ex:23 web/models/profile.ex:65
+msgid "objectClass"
+msgstr ""
+
+#: web/models/directory.ex:25 web/models/profile.ex:81
+msgid "uid"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:46
+msgid "Change Password"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:26
+msgid "About"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:27
+msgid "Directory"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:45
+msgid "Edit Profile"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:82 web/templates/session/new.html.eex:1
+#: web/templates/session/new.html.eex:10
+msgid "Log in"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:48
+msgid "Log out"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:42
+msgid "My Profile"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:30
+msgid "Office Maps"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:16
+msgid "Toggle navigation"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:4
+msgid "Top 10 Correct Answers"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:44
+msgid "View Profile"
+msgstr ""
+
+#: web/templates/layout/app.html.eex:28
+msgid "Who is that?"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:7
+#: web/templates/name_game/leaderboard.html.eex:30
+#: web/templates/name_game/leaderboard.html.eex:53
+msgid "#"
+msgstr ""
+
+#: web/templates/name_game/score.html.eex:5
+msgid "% Correct"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:27
+msgid "% of the organization is newer"
+msgstr "% of the organization is newer"
+
+#: web/templates/sms_code/index.html.eex:7
+msgid "2FA Code"
+msgstr ""
+
+#: web/templates/sms_code/index.html.eex:3
+msgid "A code was just sent to the mobile you have on file. Please enter it below."
+msgstr ""
+
+#: web/templates/page/sort_by_button_partial.html.eex:9
+msgid "A-Z"
+msgstr ""
+
+#: web/templates/settings_profile/list_input_partial.html.eex:38
+msgid "Add"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:50
+#: web/templates/settings_profile/form.html.eex:81
+msgid "Background"
+msgstr ""
+
+#: web/templates/settings_profile/form.html.eex:37
+msgid "Browse..."
+msgstr ""
+
+#: web/templates/profile/show.html.eex:43
+#: web/templates/settings_profile/form.html.eex:70
+msgid "Community"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:8
+#: web/templates/name_game/leaderboard.html.eex:31
+msgid "Correct Answers"
+msgstr ""
+
+#: web/templates/settings_profile/show.html.eex:2
+msgid "Edit"
+msgstr ""
+
+#: web/templates/sms_code/index.html.eex:1
+msgid "Enter 2FA Code"
+msgstr ""
+
+#: web/templates/shared/password.html.eex:2
+msgid "Enter new password"
+msgstr ""
+
+#: web/templates/password_change/index.html.eex:5
+msgid "Enter old password"
+msgstr ""
+
+#: web/templates/session/new.html.eex:12
+msgid "Forgot Password?"
+msgstr ""
+
+#: web/templates/name_game/show.html.eex:4
+msgid "Guess Who?"
+msgstr ""
+
+#: web/templates/password_reset/reset_sent.html.eex:2
+msgid "If we were able to locate your user record, we sent an email to the address you provided."
+msgstr ""
+
+#: web/templates/page/index.html.eex:31
+msgid "Log in to view"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:56
+#: web/templates/settings_profile/form.html.eex:85
+msgid "Misc"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:27
+msgid "Most Recognizable"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:10
+#: web/templates/name_game/leaderboard.html.eex:32
+#: web/templates/name_game/leaderboard.html.eex:56
+msgid "Name"
+msgstr ""
+
+#: web/templates/shared/password.html.eex:3
+#: web/templates/shared/password.html.eex:14
+msgid "New Password"
+msgstr ""
+
+#: web/templates/page/index.html.eex:31
+msgid "New features will be deployed periodically"
+msgstr ""
+
+#: web/templates/page/sort_by_button_partial.html.eex:8
+msgid "Newest Hire First"
+msgstr ""
+
+#: web/templates/page/index.html.eex:31
+msgid "Now under active development"
+msgstr ""
+
+#: web/templates/password_change/index.html.eex:6
+msgid "Old Password"
+msgstr ""
+
+#: web/templates/page/sort_by_button_partial.html.eex:7
+msgid "Oldest Hire First"
+msgstr ""
+
+#: web/templates/settings_profile/form.html.eex:5
+msgid "Oops, something went wrong! Please check the errors below:"
+msgstr ""
+
+#: web/templates/session/new.html.eex:8
+#: web/templates/settings_profile/form.html.eex:103
+#: web/templates/settings_profile/form.html.eex:104
+msgid "Password"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:54
+msgid "Percent Correct"
+msgstr ""
+
+#: web/templates/settings_profile/form.html.eex:96
+msgid "Please enter your password to make changes"
+msgstr ""
+
+#: web/templates/profile/show.html.eex:39
+#: web/templates/settings_profile/form.html.eex:66
+msgid "Preferences"
+msgstr ""
+
+#: web/templates/password_reset/reset_sent.html.eex:1
+msgid "Reset Link Sent"
+msgstr ""
+
+#: web/templates/page/index.html.eex:4 web/templates/page/index.html.eex:5
+#: web/templates/page/password_hall_of_shame.html.eex:5
+msgid "Search"
+msgstr ""
+
+#: web/templates/page/sort_by_button_partial.html.eex:3
+msgid "Sort By"
+msgstr ""
+
+#: web/templates/name_game/show.html.eex:28
+#: web/templates/password_change/index.html.eex:11
+#: web/templates/password_reset/edit.html.eex:6
+#: web/templates/settings_profile/form.html.eex:107
+#: web/templates/sms_code/index.html.eex:9
+msgid "Submit"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:50
+msgid "Top 10 Most Accurate"
+msgstr ""
+
+#: web/templates/name_game/leaderboard.html.eex:9
+#: web/templates/name_game/leaderboard.html.eex:55
+msgid "Total Games"
+msgstr ""
+
+#: web/templates/settings_profile/form.html.eex:34
+msgid "Upload a photo"
+msgstr ""
+
+#: web/templates/page/index.html.eex:30
+msgid "Welcome to Robby!"
+msgstr ""
+
+#: web/templates/page/sort_by_button_partial.html.eex:10
+msgid "Z-A"
+msgstr ""
+
+#: web/templates/profile/photo_complaint.html.eex:3
+msgid "Request a better picture"
+msgstr ""
+
+#: web/controllers/profile_controller.ex:36
+msgid "Successfully sent email to %{name} requesting a profile picture update. You have been copied on the email."
+msgstr ""
+
+#: web/templates/shared/password.html.eex:13
+msgid "Re-enter new password"
+msgstr ""
+
+#: web/templates/session/new.html.eex:5
+msgid "User"
+msgstr ""
+
+#: web/templates/name_game/score.html.eex:2
+msgid "Your All-Time Average:"
+msgstr ""
+
+#: web/models/profile.ex:69
+msgid "physicalDeliveryOfficeName"
+msgstr "Office Location"
+
+#, elixir-format
+#: web/controllers/profile_controller.ex:43
+msgid "Successfully sent anonymous email to %{name} requesting a profile picture update."
+msgstr ""
+
+#, elixir-format
+#: web/models/profile.ex:75
+msgid "slackUsername"
+msgstr "Slack Username"

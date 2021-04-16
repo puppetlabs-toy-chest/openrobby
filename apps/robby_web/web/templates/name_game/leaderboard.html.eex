@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-hover">
+      <caption><%= gettext("Top 10 Correct Answers")%></caption>
+      <thead>
+        <tr>
+          <th><%= gettext("#") %></th>
+          <th><%= gettext("Correct Answers") %></th>
+          <th><%= gettext("Total Games") %></th>
+          <th><%= gettext("Name") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for {{correct, total, {uid, cn}}, rank} <- Enum.with_index(@top,1) do %>
+          <tr>
+            <th scope="row"><%= rank %></th>
+            <td><%= correct %></td>
+            <td><%= total %></td>
+            <td><%= link cn, to: profile_path(@conn, :show, uid) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-hover">
+    <caption><%= gettext("Most Recognizable") %></caption>
+      <thead>
+        <tr>
+        <th><%= gettext("#") %></th>
+        <th><%= gettext("Correct Answers") %></th>
+        <th><%= gettext("Name") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for {{correct, {uid, cn}}, rank} <- Enum.with_index(@recognizable,1) do %>
+          <tr>
+            <th scope="row"><%= rank %></th>
+            <td><%= correct %></td>
+            <td><%= link cn, to: profile_path(@conn, :show, uid) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-hover">
+      <caption><%= gettext("Top 10 Most Accurate") %></caption>
+      <thead>
+        <tr>
+          <th><%= gettext("#") %></th>
+          <th><%= gettext("Percent Correct") %></th>
+          <th><%= gettext("Total Games") %></th>
+          <th><%= gettext("Name") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for {{percent, total, {uid, cn}}, rank} <- Enum.with_index(@accurate,1) do %>
+          <tr>
+            <th scope="row"><%= rank %></th>
+            <td><%= percent %></td>
+            <td><%= total %></td>
+            <td><%= link cn, to: profile_path(@conn, :show, uid) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
