@@ -3,7 +3,7 @@ defmodule RobbyWeb.UserController do
 
   alias RobbyWeb.User
 
-  plug :scrub_params, "user" when action in [:create, :update]
+  plug(:scrub_params, "user" when action in [:create, :update])
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -23,6 +23,7 @@ defmodule RobbyWeb.UserController do
         conn
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :index))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -48,6 +49,7 @@ defmodule RobbyWeb.UserController do
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :show, user))
+
       {:error, changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
@@ -59,7 +61,7 @@ defmodule RobbyWeb.UserController do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(user)
-    
+
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))

@@ -8,19 +8,20 @@ defmodule RobbyWeb.PhotoHandler do
   ## Arguments
       `uid`  The LDAP UID of the user applying the photo update
   """
-  @spec update_photo(String.t) :: :ok | {:error, String.t}
+  @spec update_photo(String.t()) :: :ok | {:error, String.t()}
   def update_photo(uid) do
-    Logger.info "Updating photo for uid #{inspect uid}"
+    Logger.info("Updating photo for uid #{inspect(uid)}")
 
     uid
-    |> PhotoResizer.resize_image
+    |> PhotoResizer.resize_image()
     |> upload_photo(uid)
   end
 
   defp upload_photo({:ok, :no_photo}, uid) do
-    Logger.info "Skipping photo upload for uid #{inspect uid}, no photo found"
+    Logger.info("Skipping photo upload for uid #{inspect(uid)}, no photo found")
     :ok
   end
+
   defp upload_photo({:ok, path}, uid) do
     path
     |> PhotoUploader.upload_photo(uid)
@@ -31,9 +32,9 @@ defmodule RobbyWeb.PhotoHandler do
     PhotoResizer.cleanup_tmp_file(path)
     :ok
   end
+
   defp cleanup_temporary_file({:error, path, error_message}) do
     PhotoResizer.cleanup_tmp_file(path)
     {:error, error_message}
   end
-
 end

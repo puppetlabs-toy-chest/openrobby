@@ -6,10 +6,10 @@ defmodule RobbyWeb.Message do
   @optional_fields []
 
   schema "messages" do
-    belongs_to :user, RobbyWeb.User
-    belongs_to :room, RobbyWeb.Room
+    belongs_to(:user, RobbyWeb.User)
+    belongs_to(:room, RobbyWeb.Room)
 
-    field :body, :string
+    field(:body, :string)
 
     timestamps()
   end

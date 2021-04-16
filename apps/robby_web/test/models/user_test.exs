@@ -3,7 +3,12 @@ defmodule RobbyWeb.UserTest do
 
   alias RobbyWeb.User
 
-  @valid_attrs %{dn: "some content", salt: "some content", username: "some content", email: "superawesome@example.com"}
+  @valid_attrs %{
+    dn: "some content",
+    salt: "some content",
+    username: "some content",
+    email: "superawesome@example.com"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

@@ -21,5 +21,4 @@ defmodule RobbyWeb.PhotoResizerTest do
     path = PhotoResizer.generate_photo_filename("tom")
     {:error, _message} = PhotoResizer.cleanup_tmp_file(path)
   end
-
 end

@@ -8,14 +8,14 @@ defmodule RobbyWeb.Directory do
 
   @primary_key {:dn, :string, autogenerate: false}
   schema "users" do
-    field :cn, :string
-    field :displayName, :string
-    field :employeeNumber, :string
-    field :objectClass, {:array, :string}
-    field :title, :string
-    field :uid, :string
-    field :pwdChangedTime, :string
-    field :startDate, :naive_datetime
+    field(:cn, :string)
+    field(:displayName, :string)
+    field(:employeeNumber, :string)
+    field(:objectClass, {:array, :string})
+    field(:title, :string)
+    field(:uid, :string)
+    field(:pwdChangedTime, :string)
+    field(:startDate, :naive_datetime)
   end
 
   gettext("cn")
@@ -27,5 +27,4 @@ defmodule RobbyWeb.Directory do
   def orgPeople do
     ProfileHelper.orgPeople(RobbyWeb.Directory)
   end
-
 end

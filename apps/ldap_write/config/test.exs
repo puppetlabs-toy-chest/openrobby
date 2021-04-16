@@ -7,5 +7,5 @@ config :ldap_write,
   use_ssl: true,
   write_dn: "cn=internal-password-reset,ou=service,ou=users,dc=example,dc=com",
   write_password: "password"
-  
+
 config :ldap_wrapper, ldap_api: LdapWrapper.Ldap.Sandbox

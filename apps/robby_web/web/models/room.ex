@@ -2,9 +2,9 @@ defmodule RobbyWeb.Room do
   use RobbyWeb.Web, :model
 
   schema "rooms" do
-    field :name, :string
-    belongs_to :user, RobbyWeb.User
-    has_many :messages, RobbyWeb.Message
+    field(:name, :string)
+    belongs_to(:user, RobbyWeb.User)
+    has_many(:messages, RobbyWeb.Message)
 
     timestamps()
   end

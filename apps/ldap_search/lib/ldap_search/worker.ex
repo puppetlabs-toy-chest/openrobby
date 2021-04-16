@@ -15,8 +15,12 @@ defmodule LdapSearch.Worker do
     {:ok, handle} = establish_connection()
     {:noreply, handle}
   end
+
   def handle_info(msg, state) do
-    Logger.debug("#{__MODULE__} got a message it didn't know what to do with: #{inspect msg}. Throwing it away...")
+    Logger.debug(
+      "#{__MODULE__} got a message it didn't know what to do with: #{inspect(msg)}. Throwing it away..."
+    )
+
     {:noreply, state}
   end
 
@@ -79,6 +83,7 @@ defmodule LdapSearch.Worker do
         LdapWrapper.disconnect(handle)
         {:ok, new_handle} = establish_connection()
         do_search(new_handle, email_address, attributes)
+
       search_results ->
         {:reply, search_results, handle}
     end

@@ -9,6 +9,7 @@ defmodule LdapWrite.Worker do
 
   defp establish_connection_as_user(dn, password) do
     {:ok, handle} = LdapWrapper.connect(ldap_hosts(), ldap_port(), ldap_use_ssl())
+
     LdapWrapper.authenticate(handle, dn, password)
     |> case do
       :ok -> {:ok, handle}
@@ -34,9 +35,12 @@ defmodule LdapWrite.Worker do
 
   def change_password_as_user(dn, new_password, old_password) do
     case establish_connection_as_user(dn, old_password) do
-      {:ok, handle} -> LdapWrapper.change_password(handle, dn, new_password, old_password)
-             |> handle_write_results
-      {:error, msg} -> {:error, msg}
+      {:ok, handle} ->
+        LdapWrapper.change_password(handle, dn, new_password, old_password)
+        |> handle_write_results
+
+      {:error, msg} ->
+        {:error, msg}
     end
   end
 
@@ -46,8 +50,11 @@ defmodule LdapWrite.Worker do
 
   def write_password(user_dn, new_password) do
     {:ok, handle} = establish_connection()
-    result = LdapWrapper.set_password(handle, user_dn, new_password)
-    |> handle_write_results
+
+    result =
+      LdapWrapper.set_password(handle, user_dn, new_password)
+      |> handle_write_results
+
     LdapWrapper.disconnect(handle)
     result
   end
@@ -56,13 +63,16 @@ defmodule LdapWrite.Worker do
     case establish_connection_as_user(changeset.model.dn, changeset.params["password"]) do
       {:ok, handle} ->
         operations = categorize_changes(changeset)
+
         result =
           LdapWrapper.modify(handle, changeset.model.dn, operations)
           |> handle_write_results
 
         LdapWrapper.disconnect(handle)
         result
-      error -> error
+
+      error ->
+        error
     end
   end
 
@@ -73,9 +83,8 @@ defmodule LdapWrite.Worker do
       type = Map.get(changeset.types, attribute)
       ldap_operation(ldap_attr, type, old_val, new_val)
     end
-    |> List.flatten
+    |> List.flatten()
   end
-
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   #                                                                           #
@@ -86,7 +95,8 @@ defmodule LdapWrite.Worker do
   # it does actually return something?  This must be documented and fixed.    #
   #                                                                           #
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  defp categorize_single_changes(map,  _) when map == %{}, do: []
+  defp categorize_single_changes(map, _) when map == %{}, do: []
+
   defp categorize_single_changes(change_map, model) do
     for {attribute, new_val} <- change_map do
       old_val = Map.get(model, attribute)
@@ -111,7 +121,9 @@ defmodule LdapWrite.Worker do
 
   def ldap_operation(attribute, _, nil, new_val), do: :eldap.mod_add(attribute, [new_val])
   def ldap_operation(attribute, _, old_val, nil), do: :eldap.mod_delete(attribute, [old_val])
-  def ldap_operation(attribute, _, _old_val, new_val), do: :eldap.mod_replace(attribute, [new_val])
+
+  def ldap_operation(attribute, _, _old_val, new_val),
+    do: :eldap.mod_replace(attribute, [new_val])
 
   def handle_write_results({:error, {:response, ldap_reason}}), do: {:error, ldap_reason}
   def handle_write_results(:ok), do: :ok

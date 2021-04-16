@@ -36,15 +36,14 @@ defmodule Mix.Tasks.Robby3.PhotoRefresh do
   end
 
   defp process_refresh([uid]) do
-      update_photo(uid)
+    update_photo(uid)
   end
 
   defp update_photo(%Directory{uid: uid}), do: update_photo(uid)
-  defp update_photo(uid),                  do: PhotoHandler.update_photo(uid)
+  defp update_photo(uid), do: PhotoHandler.update_photo(uid)
 
   defp active_org_people() do
-    Directory.orgPeople
-    |> LdapRepo.all
+    Directory.orgPeople()
+    |> LdapRepo.all()
   end
-
 end

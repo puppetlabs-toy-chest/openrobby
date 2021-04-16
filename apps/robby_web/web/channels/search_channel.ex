@@ -8,13 +8,14 @@ defmodule RobbyWeb.SearchChannel do
 
   def handle_in("new_msg", %{"body" => body}, socket) do
     results =
-      RobbyWeb.Profile.orgPeople
-      |> Ecto.Query.from
+      RobbyWeb.Profile.orgPeople()
+      |> Ecto.Query.from()
       |> build_query_from_search_terms(body)
       |> Ecto.Query.select([u], u.uid)
-      |> RobbyWeb.LdapRepo.all
+      |> RobbyWeb.LdapRepo.all()
       |> Enum.map(&String.replace(&1, ".", "_"))
-    push socket, "new_msg", %{body: results}
+
+    push(socket, "new_msg", %{body: results})
     {:noreply, socket}
   end
 
@@ -30,12 +31,18 @@ defmodule RobbyWeb.SearchChannel do
     queryable
     |> Ecto.Query.where([u], like(u.cn, ^search_terms))
   end
+
   def build_query_from_search_terms(true, queryable, search_terms) do
     for pair <- String.split(search_terms) do
       [attr, value] = String.split(pair, ":")
-      %Ecto.Query.QueryExpr{expr: {:like, [], [{{:., [], [{:&, [], [0]}, String.to_existing_atom(attr)]}, [], []}, value]}}
-    end
-    |> Enum.reduce(queryable, fn (expr, query) -> Ecto.Query.Builder.Filter.apply(query, :where, expr) end)
-  end
 
+      %Ecto.Query.QueryExpr{
+        expr:
+          {:like, [], [{{:., [], [{:&, [], [0]}, String.to_existing_atom(attr)]}, [], []}, value]}
+      }
+    end
+    |> Enum.reduce(queryable, fn expr, query ->
+      Ecto.Query.Builder.Filter.apply(query, :where, expr)
+    end)
+  end
 end

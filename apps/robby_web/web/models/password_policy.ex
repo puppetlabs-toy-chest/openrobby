@@ -2,9 +2,9 @@ defmodule RobbyWeb.PasswordPolicy do
   use RobbyWeb.Web, :model
 
   schema "password_policies" do
-    field :object_class, :string
-    field :min_length, :integer
-    field :min_char_classes, :integer
+    field(:object_class, :string)
+    field(:min_length, :integer)
+    field(:min_char_classes, :integer)
 
     timestamps()
   end
@@ -25,27 +25,30 @@ defmodule RobbyWeb.PasswordPolicy do
   end
 
   def max_effective_policy([]), do: %RobbyWeb.PasswordPolicy{min_length: 0, min_char_classes: 0}
+
   def max_effective_policy(policies) do
     length_policy = Enum.max_by(policies, fn policy -> policy.min_length end)
     char_policy = Enum.max_by(policies, fn policy -> policy.min_char_classes end)
-    %RobbyWeb.PasswordPolicy{min_length: length_policy.min_length, min_char_classes: char_policy.min_char_classes}
+
+    %RobbyWeb.PasswordPolicy{
+      min_length: length_policy.min_length,
+      min_char_classes: char_policy.min_char_classes
+    }
   end
 
   def passes?(policy, password) do
     cond do
       String.length(password) < policy.min_length -> {:error, :too_short}
       num_char_classes(password) < policy.min_char_classes -> {:error, :too_simple}
-      unprintable? password -> {:error, :not_printable}
+      unprintable?(password) -> {:error, :not_printable}
       true -> :ok
     end
   end
 
   def num_char_classes(password) do
-    [ :has_upper?, :has_lower?, :has_digit?, :has_punct?,
-      :has_space?,
-    ]
-    |> Enum.map(&(apply(__MODULE__, &1, [password])))
-    |> Enum.count(&(&1))
+    [:has_upper?, :has_lower?, :has_digit?, :has_punct?, :has_space?]
+    |> Enum.map(&apply(__MODULE__, &1, [password]))
+    |> Enum.count(& &1)
   end
 
   def has_upper?(password), do: Regex.match?(~r/[[:upper:]]/u, password)

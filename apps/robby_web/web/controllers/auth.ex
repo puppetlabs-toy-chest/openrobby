@@ -6,7 +6,7 @@ defmodule RobbyWeb.Auth do
   def init(opts) do
     Keyword.fetch!(opts, :repo)
   end
-  
+
   def call(conn, repo) do
     user_id = get_session(conn, :user_id)
     user = user_id && repo.get(RobbyWeb.User, user_id)
@@ -26,19 +26,24 @@ defmodule RobbyWeb.Auth do
 
     cond do
       ldap_user && LdapSearch.authenticate(ldap_user.dn, given_pass) == :ok ->
-        user = case repo.get_by(RobbyWeb.User, username: user) do
-          nil ->
-            RobbyWeb.User.changeset_from_ldap(ldap_user)
-            |> repo.insert
-            |> case do
-              {:ok, user} -> user
-            end
-          user -> user
-        end
-        
+        user =
+          case repo.get_by(RobbyWeb.User, username: user) do
+            nil ->
+              RobbyWeb.User.changeset_from_ldap(ldap_user)
+              |> repo.insert
+              |> case do
+                {:ok, user} -> user
+              end
+
+            user ->
+              user
+          end
+
         {:ok, login(conn, user)}
+
       ldap_user ->
         {:error, :unauthorized, conn}
+
       true ->
         {:error, :not_found, conn}
     end

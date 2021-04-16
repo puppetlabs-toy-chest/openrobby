@@ -22,7 +22,7 @@ config :logger,
   backends: [
     :console,
     {LoggerFileBackend, :info},
-    {LoggerFileBackend, :error},
+    {LoggerFileBackend, :error}
   ]
 
 config :logger, level: :info
@@ -40,7 +40,7 @@ config :robby_web, RobbyWeb.Emailer,
   port: 587,
   username: "not real user",
   password: "not real password",
-  ssl: :false,
+  ssl: false,
   tls: :always,
   auth: :always
 

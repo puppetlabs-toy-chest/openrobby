@@ -4,7 +4,7 @@ defmodule RobbyWeb.RoomController do
   alias RobbyWeb.Room
   alias RobbyWeb.{LdapRepo, Directory}
 
-  plug :scrub_params, "room" when action in [:create, :update]
+  plug(:scrub_params, "room" when action in [:create, :update])
 
   def index(conn, _params) do
     rooms = Repo.all(Room)
@@ -24,6 +24,7 @@ defmodule RobbyWeb.RoomController do
         conn
         |> put_flash(:info, "Room created successfully.")
         |> redirect(to: room_path(conn, :index))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -34,6 +35,7 @@ defmodule RobbyWeb.RoomController do
       Room
       |> from(preload: [:user])
       |> Repo.get!(id)
+
     owner = LdapRepo.get!(Directory, room.user.dn)
     render(conn, "show.html", room: room, owner: owner)
   end
@@ -53,6 +55,7 @@ defmodule RobbyWeb.RoomController do
         conn
         |> put_flash(:info, "Room updated successfully.")
         |> redirect(to: room_path(conn, :show, room))
+
       {:error, changeset} ->
         render(conn, "edit.html", room: room, changeset: changeset)
     end

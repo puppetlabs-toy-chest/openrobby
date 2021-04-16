@@ -37,6 +37,6 @@ config :ex_aws,
   s3_adapter: ExAws.S3
 
 # Import dependent project configuration
-import_config "../../ldap_wrapper/config/#{Mix.env}.exs"
-import_config "../../ldap_write/config/#{Mix.env}.exs"
-import_config "../../ldap_search/config/#{Mix.env}.exs"
+import_config "../../ldap_wrapper/config/#{Mix.env()}.exs"
+import_config "../../ldap_write/config/#{Mix.env()}.exs"
+import_config "../../ldap_search/config/#{Mix.env()}.exs"

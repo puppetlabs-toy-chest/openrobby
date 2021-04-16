@@ -2,10 +2,10 @@ defmodule RobbyWeb.User do
   use RobbyWeb.Web, :model
 
   schema "users" do
-    field :dn, :string
-    field :username, :string
-    field :salt, :string
-    field :email, :string
+    field(:dn, :string)
+    field(:username, :string)
+    field(:salt, :string)
+    field(:email, :string)
 
     timestamps()
   end
@@ -29,17 +29,18 @@ defmodule RobbyWeb.User do
     %RobbyWeb.User{}
     |> changeset
   end
+
   def changeset_from_ldap(ldap_user) do
     %RobbyWeb.User{}
     |> changeset(%{
-        :dn       => ldap_user.dn,
-        :username => ldap_user.uid,
-        :salt     => generate_new_salt(),
-        :email    => ldap_user.mail
-      })
+      :dn => ldap_user.dn,
+      :username => ldap_user.uid,
+      :salt => generate_new_salt(),
+      :email => ldap_user.mail
+    })
   end
 
   def generate_new_salt do
-    :crypto.strong_rand_bytes(48) |> Base.encode64
+    :crypto.strong_rand_bytes(48) |> Base.encode64()
   end
 end

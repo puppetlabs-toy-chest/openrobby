@@ -8,40 +8,40 @@ defmodule RobbyWeb.Profile do
 
   @primary_key {:dn, :string, autogenerate: false}
   schema "users" do
-    field :bribeMeWith, :string
-    field :cn, :string
-    field :dietaryRestrictions, :string
-    field :employeeNumber, :string
-    field :favouriteDrink, :string
-    field :github, :string
-    field :googleGroups, :string
-    field :hasSubordinates, :string
-    field :interestingFact, :string
-    field :ircNickname, :string
-    field :jpegPhoto, :binary
-    field :labeledURI, :string
-    field :languages, {:array, :string}
-    field :mail, :string
-    field :manager, :string
-    field :mobile, :string
-    field :objectClass, {:array, :string}
-    field :onCall, :string
-    field :ou, {:array, :string}
-    field :personalTitle, :string
-    field :physicalDeliveryOfficeName, :string
-    field :projects, {:array, :string}
-    field :pronoun, :string
-    field :pseudonym, :string
-    field :shirtSize, :string
-    field :skills, {:array, :string}
-    field :slackUsername, :string
-    field :sshPublicKey, {:array, :string}
-    field :startDate, :naive_datetime
-    field :steamAccount, :string
-    field :telephoneNumber, :string
-    field :title, :string
-    field :twitterHandle, :string
-    field :uid, :string
+    field(:bribeMeWith, :string)
+    field(:cn, :string)
+    field(:dietaryRestrictions, :string)
+    field(:employeeNumber, :string)
+    field(:favouriteDrink, :string)
+    field(:github, :string)
+    field(:googleGroups, :string)
+    field(:hasSubordinates, :string)
+    field(:interestingFact, :string)
+    field(:ircNickname, :string)
+    field(:jpegPhoto, :binary)
+    field(:labeledURI, :string)
+    field(:languages, {:array, :string})
+    field(:mail, :string)
+    field(:manager, :string)
+    field(:mobile, :string)
+    field(:objectClass, {:array, :string})
+    field(:onCall, :string)
+    field(:ou, {:array, :string})
+    field(:personalTitle, :string)
+    field(:physicalDeliveryOfficeName, :string)
+    field(:projects, {:array, :string})
+    field(:pronoun, :string)
+    field(:pseudonym, :string)
+    field(:shirtSize, :string)
+    field(:skills, {:array, :string})
+    field(:slackUsername, :string)
+    field(:sshPublicKey, {:array, :string})
+    field(:startDate, :naive_datetime)
+    field(:steamAccount, :string)
+    field(:telephoneNumber, :string)
+    field(:title, :string)
+    field(:twitterHandle, :string)
+    field(:uid, :string)
   end
 
   gettext("bribeMeWith")
@@ -95,13 +95,13 @@ defmodule RobbyWeb.Profile do
     |> __schema__
     |> Stream.filter(fn {field, _} -> @writable_fields |> Enum.member?(field) end)
     |> Enum.filter(fn {_, type} -> is_atom(type) end)
-    |> Keyword.keys
+    |> Keyword.keys()
   end
 
   def array_fields do
     :fields
     |> __schema__
-    |> MapSet.new
+    |> MapSet.new()
     |> MapSet.difference(MapSet.new(single_fields()))
     |> MapSet.intersection(MapSet.new(@writable_fields))
   end
@@ -117,9 +117,11 @@ defmodule RobbyWeb.Profile do
   defp decode_photo_if_necessary(params = %{"jpegPhoto" => [Plug.Upload, _type, _file, path]}) do
     binary =
       path
-      |> File.read!
+      |> File.read!()
+
     Map.put(params, "jpegPhoto", binary)
   end
+
   defp decode_photo_if_necessary(params), do: params
 
   def changeset_for_ldap(model, params \\ :empty) do
@@ -127,30 +129,32 @@ defmodule RobbyWeb.Profile do
       params
       |> parse_params
       |> decode_photo_if_necessary
+
     model
     |> changeset(parsed_params)
   end
 
   defp parse_params(params) do
-    for {att, val} <- params, into: %{}, do: {att, parse_param({att,val})}
+    for {att, val} <- params, into: %{}, do: {att, parse_param({att, val})}
   end
 
   defp parse_param({_att, val}) when is_map(val) do
     val
-    |> Map.values
+    |> Map.values()
     |> Enum.reject(&is_nil/1)
-    |> Enum.uniq
+    |> Enum.uniq()
   end
+
   defp parse_param({att, val}) do
     cond do
       Enum.member?(array_fields(:s), att) && val -> [val]
-      Enum.member?(array_fields(:s), att)        -> []
-      true                                       -> val
+      Enum.member?(array_fields(:s), att) -> []
+      true -> val
     end
   end
 
   def get_photo(uid) do
-    Logger.debug "Retrieving photo from LDAP for user #{inspect uid}"
+    Logger.debug("Retrieving photo from LDAP for user #{inspect(uid)}")
 
     LdapRepo.get_by(Profile, uid: uid)
     |> Map.get(:jpegPhoto)

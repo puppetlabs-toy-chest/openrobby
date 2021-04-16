@@ -24,7 +24,6 @@ defmodule RobbyWeb.ChannelCase do
       import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
-
       # The default endpoint for testing
       @endpoint RobbyWeb.Endpoint
     end

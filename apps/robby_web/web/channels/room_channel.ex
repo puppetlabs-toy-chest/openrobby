@@ -15,27 +15,32 @@ defmodule RobbyWeb.RoomChannel do
 
   def handle_info({:after_join, params}, socket) do
     room = Repo.get(Room, socket.assigns.room_id)
-    messages = Repo.all(
-      from m in assoc(room, :messages),
-      preload: [:user],
-      order_by: [desc: m.inserted_at],
-      where: m.id > ^params["last_message_id"],
-      limit: 100
-    )
+
+    messages =
+      Repo.all(
+        from(m in assoc(room, :messages),
+          preload: [:user],
+          order_by: [desc: m.inserted_at],
+          where: m.id > ^params["last_message_id"],
+          limit: 100
+        )
+      )
+
     emails =
       messages
       |> Enum.map(fn m -> m.user.username end)
-      |> Enum.uniq
+      |> Enum.uniq()
+
     users =
       Ecto.Query.from(u in Profile, where: u.mail in ^emails, select: {u.dn, u.cn})
-      |> LdapRepo.all
-      |> Enum.into(Map.new)
+      |> LdapRepo.all()
+      |> Enum.into(Map.new())
 
     processed_messages =
       messages
-      |> Enum.map( fn m -> %{body: m.body, user: users[m.user.dn], inserted_at: m.inserted_at} end)
+      |> Enum.map(fn m -> %{body: m.body, user: users[m.user.dn], inserted_at: m.inserted_at} end)
 
-    push socket, "messages", %{messages: processed_messages}
+    push(socket, "messages", %{messages: processed_messages})
     {:noreply, socket}
   end
 
@@ -48,10 +53,9 @@ defmodule RobbyWeb.RoomChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (rooms:lobby).
   def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
+    broadcast(socket, "shout", payload)
     {:noreply, socket}
   end
-
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   #                                                                           #
@@ -67,9 +71,15 @@ defmodule RobbyWeb.RoomChannel do
     Room
     |> Repo.get(socket.assigns.room_id)
     |> Ecto.Model.build(:messages)
-    |> Message.changeset(Map.merge(params, %{"user_id" => socket.assigns.user.id, "body" => (body |> Phoenix.HTML.html_escape |> Phoenix.HTML.safe_to_string )}))
-    |> Repo.insert!
-    broadcast_from! socket, "new_msg", %{body: body, user: socket.assigns.ldap_user.cn}
+    |> Message.changeset(
+      Map.merge(params, %{
+        "user_id" => socket.assigns.user.id,
+        "body" => body |> Phoenix.HTML.html_escape() |> Phoenix.HTML.safe_to_string()
+      })
+    )
+    |> Repo.insert!()
+
+    broadcast_from!(socket, "new_msg", %{body: body, user: socket.assigns.ldap_user.cn})
     {:noreply, socket}
   end
 
@@ -77,7 +87,7 @@ defmodule RobbyWeb.RoomChannel do
   # to the client. The default implementation is just to push it
   # downstream but one could filter or change the event.
   def handle_out(event, payload, socket) do
-    push socket, event, payload
+    push(socket, event, payload)
     {:noreply, socket}
   end
 
