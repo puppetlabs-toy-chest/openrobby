@@ -1,5 +1,4 @@
 defmodule RobbyWeb.ExAws.Sandbox do
-
   @moduledoc """
   Sandbox service mock for AWS.
 
@@ -23,17 +22,23 @@ defmodule RobbyWeb.ExAws.Sandbox do
 
   """
 
-  def request!(%ExAws.Operation.S3{path: "robby.jpg"} = operation),      do: amazon_response("robby.jpg")
-  def request!(%ExAws.Operation.S3{path: "matt.jpg"} = operation),      do: amazon_response("matt.jpg")
-  def request!(%ExAws.Operation.S3{path: "clippy.jpg"} = operation),     do: amazon_response("clippy.jpg")
+  def request!(%ExAws.Operation.S3{path: "robby.jpg"} = operation),
+    do: amazon_response("robby.jpg")
+
+  def request!(%ExAws.Operation.S3{path: "matt.jpg"} = operation), do: amazon_response("matt.jpg")
+
+  def request!(%ExAws.Operation.S3{path: "clippy.jpg"} = operation),
+    do: amazon_response("clippy.jpg")
+
   def request!(%ExAws.Operation.S3{path: "jim.jpg"} = operation), do: amazon_response("jim.jpg")
-  def request!(_unknown_operation), do: raise "Operation Failed"
+  def request!(_unknown_operation), do: raise("Operation Failed")
 
   defp amazon_response("robby.jpg") do
     %{
       body: "",
       headers: [
-        {"x-amz-id-2", "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
+        {"x-amz-id-2",
+         "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
         {"x-amz-request-id", "9999999999999999"},
         {"Date", "Thu, 04 Jan 2018 22:50:44 GMT"},
         {"ETag", "99999999999999999999999999999999"},
@@ -49,7 +54,8 @@ defmodule RobbyWeb.ExAws.Sandbox do
     %{
       body: "",
       headers: [
-        {"x-amz-id-2", "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
+        {"x-amz-id-2",
+         "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
         {"x-amz-request-id", "9999999999999999"},
         {"Date", "Thu, 04 Jan 2018 22:50:44 GMT"},
         {"ETag", "99999999999999999999999999999999"},
@@ -65,7 +71,8 @@ defmodule RobbyWeb.ExAws.Sandbox do
     %{
       body: "",
       headers: [
-        {"x-amz-id-2", "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
+        {"x-amz-id-2",
+         "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
         {"x-amz-request-id", "9999999999999999"},
         {"Date", "Thu, 04 Jan 2018 22:50:44 GMT"},
         {"ETag", "99999999999999999999999999999999"},
@@ -81,7 +88,8 @@ defmodule RobbyWeb.ExAws.Sandbox do
     %{
       body: "",
       headers: [
-        {"x-amz-id-2", "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
+        {"x-amz-id-2",
+         "9999999999999999999999999999999999999999999999999999999999999999X99999999999"},
         {"x-amz-request-id", "9999999999999999"},
         {"Date", "Thu, 04 Jan 2018 22:50:44 GMT"},
         {"ETag", "99999999999999999999999999999999"},

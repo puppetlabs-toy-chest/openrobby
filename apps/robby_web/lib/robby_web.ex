@@ -12,20 +12,28 @@ defmodule RobbyWeb do
       # Start the Ecto repository
       worker(RobbyWeb.Repo, []),
       worker(RobbyWeb.LdapRepo, []),
-      worker(ConCache, [
+      worker(
+        ConCache,
         [
-          ttl_check: :timer.minutes(1),
-          ttl: :timer.minutes(15)
+          [
+            ttl_check: :timer.minutes(1),
+            ttl: :timer.minutes(15)
+          ],
+          [name: :password_reset]
         ],
-        [name: :password_reset]
-      ], [id: :password_reset]),
-      worker(ConCache, [
+        id: :password_reset
+      ),
+      worker(
+        ConCache,
         [
-          ttl_check: :timer.minutes(15),
-          ttl: :timer.hours(4)
+          [
+            ttl_check: :timer.minutes(15),
+            ttl: :timer.hours(4)
+          ],
+          [name: :full_company_employee_ids]
         ],
-        [name: :full_company_employee_ids]
-      ], [id: :full_company_employee_ids]),
+        id: :full_company_employee_ids
+      )
       # Here you could define other workers and supervisors as children
       # worker(RobbyWeb.Worker, [arg1, arg2, arg3]),
     ]
@@ -47,8 +55,10 @@ defmodule RobbyWeb do
   end
 
   def test_ldap(RobbyWeb.Ldap.Adapter.Sandbox), do: :ok
+
   def test_ldap(_ldap_api) do
-	 	dn = RobbyWeb.LdapRepo.config[:user_dn]
+    dn = RobbyWeb.LdapRepo.config()[:user_dn]
+
     try do
       if nil == RobbyWeb.LdapRepo.get_by(RobbyWeb.Profile, dn: dn) do
         exit("Could not find connection DN '#{dn}' in LDAP")

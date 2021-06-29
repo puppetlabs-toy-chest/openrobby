@@ -67,7 +67,6 @@ defmodule RobbyWeb.Web do
       alias RobbyWeb.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
-
     end
   end
 

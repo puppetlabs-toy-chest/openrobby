@@ -3,7 +3,7 @@ defmodule RobbyWeb.PasswordPolicyController do
 
   alias RobbyWeb.PasswordPolicy
 
-  plug :scrub_params, "password_policy" when action in [:create, :update]
+  plug(:scrub_params, "password_policy" when action in [:create, :update])
 
   def index(conn, _params) do
     password_policies = Repo.all(PasswordPolicy)
@@ -23,6 +23,7 @@ defmodule RobbyWeb.PasswordPolicyController do
         conn
         |> put_flash(:info, "Password policy created successfully.")
         |> redirect(to: password_policy_path(conn, :index))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -48,6 +49,7 @@ defmodule RobbyWeb.PasswordPolicyController do
         conn
         |> put_flash(:info, "Password policy updated successfully.")
         |> redirect(to: password_policy_path(conn, :show, password_policy))
+
       {:error, changeset} ->
         render(conn, "edit.html", password_policy: password_policy, changeset: changeset)
     end

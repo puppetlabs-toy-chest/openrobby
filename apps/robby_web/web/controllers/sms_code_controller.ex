@@ -2,16 +2,17 @@ defmodule RobbyWeb.SmsCodeController do
   use RobbyWeb.Web, :controller
   require Logger
 
-  plug :find_token
-  plug :find_email
-  plug :find_ldap_user
-  plug :find_repo_user
-  plug :validate_token, expiry: 15*60
+  plug(:find_token)
+  plug(:find_email)
+  plug(:find_ldap_user)
+  plug(:find_repo_user)
+  plug(:validate_token, expiry: 15 * 60)
 
   defp find_email(conn, _) do
     email =
       ConCache.get(:password_reset, conn.params["password_reset_id"])
       |> Map.get(:email)
+
     assign(conn, :email, email)
   end
 
@@ -19,18 +20,23 @@ defmodule RobbyWeb.SmsCodeController do
     token =
       ConCache.get(:password_reset, conn.params["password_reset_id"])
       |> Map.get(:token)
+
     assign(conn, :token, token)
   end
+
   defp validate_token(conn, opts) do
-    expiry = Keyword.get(opts, :expiry, 15*60)
+    expiry = Keyword.get(opts, :expiry, 15 * 60)
+
     Phoenix.Token.verify(conn, conn.assigns.repo_user.salt, conn.assigns.token, max_age: expiry)
     |> case do
       {:ok, data} ->
         assign(conn, :token_data, data)
+
       {:error, :expired} ->
         conn
         |> put_flash(:error, "Reset link expired. Please try again")
         |> redirect(to: password_reset_path(conn, :new))
+
       {:error, :invalid} ->
         conn
         |> put_flash(:error, "Invalid reset link.")
@@ -50,7 +56,7 @@ defmodule RobbyWeb.SmsCodeController do
 
   def index(conn, _) do
     SmsCode.Generator.send_new_code(conn.assigns.token_data.dn, conn.assigns.token_data.mobile)
-    render conn, "index.html"
+    render(conn, "index.html")
   end
 
   def create(conn, %{"password_reset_sms_code" => %{"sms_code" => sms_code}}) do
@@ -60,14 +66,23 @@ defmodule RobbyWeb.SmsCodeController do
 
   defp handle_2fa_code(false, conn) do
     reset_id = conn.params["password_reset_id"]
-    ConCache.update(:password_reset, reset_id, fn (state) -> {:ok, Map.put(state, :have_2fa?, false)} end)
+
+    ConCache.update(:password_reset, reset_id, fn state ->
+      {:ok, Map.put(state, :have_2fa?, false)}
+    end)
+
     conn
     |> put_flash(:error, "Wrong 2 factor auth code")
     |> render("index.html")
   end
+
   defp handle_2fa_code(true, conn) do
     reset_id = conn.params["password_reset_id"]
-    ConCache.update(:password_reset, reset_id, fn (state) -> {:ok, Map.put(state, :have_2fa?, true)} end)
+
+    ConCache.update(:password_reset, reset_id, fn state ->
+      {:ok, Map.put(state, :have_2fa?, true)}
+    end)
+
     conn
     |> put_flash(:info, "Code accepted, please enter a new password")
     |> redirect(to: password_reset_path(conn, :edit, reset_id))

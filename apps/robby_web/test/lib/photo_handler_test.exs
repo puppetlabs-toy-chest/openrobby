@@ -13,5 +13,4 @@ defmodule RobbyWeb.PhotoHandlerTest do
   test "produces an error when there's an issue" do
     {:error, _message} = PhotoHandler.update_photo("jim")
   end
-
 end

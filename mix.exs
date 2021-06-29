@@ -2,10 +2,12 @@ defmodule Robby.Mixfile do
   use Mix.Project
 
   def project do
-    [apps_path: "apps",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      apps_path: "apps",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -26,7 +28,7 @@ defmodule Robby.Mixfile do
       {:conform, "~> 2.0"},
       {:erlware_commons, "~> 1.0"},
       {:gen_smtp, "== 0.11.0", override: true},
-      {:combine, "~> 0.9", override: true},
+      {:combine, "~> 0.9", override: true}
     ]
   end
 end

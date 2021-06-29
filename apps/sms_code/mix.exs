@@ -2,22 +2,23 @@ defmodule SmsCode.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :sms_code,
-     version: get_version(),
-     deps_path: "../../deps",
-     lockfile: "../../mix.lock",
-     elixir: "~> 1.0",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :sms_code,
+      version: get_version(),
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
+      elixir: "~> 1.0",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :ex_twilio, :con_cache],
-     mod: {SmsCode, []}]
+    [applications: [:logger, :ex_twilio, :con_cache], mod: {SmsCode, []}]
   end
 
   defp get_version do
@@ -47,7 +48,7 @@ defmodule SmsCode.Mixfile do
       {:distillery, "~> 1.5", runtime: false},
       {:conform, "~> 2.0"},
       {:poison, "~> 3.1", override: true},
-      {:erlware_commons, "~> 1.0"},
+      {:erlware_commons, "~> 1.0"}
     ]
   end
 end

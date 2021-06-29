@@ -7,7 +7,9 @@ defmodule RobbyWeb.NameGameTest do
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = NameGame.changeset(%NameGame{correct_answer: "My Name", player_id: "1"}, @valid_attrs)
+    changeset =
+      NameGame.changeset(%NameGame{correct_answer: "My Name", player_id: "1"}, @valid_attrs)
+
     assert changeset.valid?
   end
 

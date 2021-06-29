@@ -13,13 +13,17 @@ defmodule RobbyWeb.Plugs.LoadEmployeeIds do
     |> case do
       nil ->
         list =
-          Ecto.Query.from(u in RobbyWeb.Directory.orgPeople,
-            select: u.startDate)
-          |> RobbyWeb.LdapRepo.all
-          |> Enum.sort
+          Ecto.Query.from(u in RobbyWeb.Directory.orgPeople(),
+            select: u.startDate
+          )
+          |> RobbyWeb.LdapRepo.all()
+          |> Enum.sort()
+
         ConCache.put(:full_company_employee_ids, :all, list)
         list
-      list -> list
+
+      list ->
+        list
     end
   end
 end

@@ -7,11 +7,11 @@ defmodule RobbyWeb.NameGame do
   @optional_fields [:chosen_answer, :options]
 
   schema "name_games" do
-    field :player_id, :integer
-    field :correct_answer, :string
-    field :correct_answer_uid, :string
-    field :chosen_answer, :string
-    field :options, {:array, :string}
+    field(:player_id, :integer)
+    field(:correct_answer, :string)
+    field(:correct_answer_uid, :string)
+    field(:chosen_answer, :string)
+    field(:options, {:array, :string})
     timestamps()
   end
 
@@ -28,11 +28,12 @@ defmodule RobbyWeb.NameGame do
   end
 
   def recent_guesses(player_id) do
-    Ecto.Query.from turn in __MODULE__,
+    Ecto.Query.from(turn in __MODULE__,
       where: turn.player_id == ^player_id and turn.correct_answer == turn.chosen_answer,
       select: turn.correct_answer,
       order_by: [desc: turn.updated_at],
       limit: 100
+    )
   end
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -41,27 +42,42 @@ defmodule RobbyWeb.NameGame do
   #                                                                           #
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   def people_pool(model) do
-    not_allowed = recent_guesses(model.player_id) |> Repo.all
-    query = Ecto.Query.from u in RobbyWeb.Directory.orgPeople,
-            select: %{cn: u.cn}
+    not_allowed = recent_guesses(model.player_id) |> Repo.all()
 
-    for cn <- [model.correct_answer|not_allowed] do
-      query = Ecto.Query.from u in query,
-              where: u.cn != ^cn
+    query =
+      Ecto.Query.from(u in RobbyWeb.Directory.orgPeople(),
+        select: %{cn: u.cn}
+      )
+
+    for cn <- [model.correct_answer | not_allowed] do
+      query =
+        Ecto.Query.from(u in query,
+          where: u.cn != ^cn
+        )
     end
+
     query
   end
 
   def next_right_answer(player_id) do
-    not_allowed = recent_guesses(player_id) |> Repo.all
-    query = Ecto.Query.from u in RobbyWeb.Profile,
-    where: "orgPerson" in u.objectClass and not is_nil(u.employeeNumber) and not is_nil(u.jpegPhoto),
-    select: %{cn: u.cn, uid: u.uid}
-    Enum.reduce(not_allowed, query, fn person, query -> Ecto.Query.from u in query, where: u.cn != ^person end)
+    not_allowed = recent_guesses(player_id) |> Repo.all()
+
+    query =
+      Ecto.Query.from(u in RobbyWeb.Profile,
+        where:
+          "orgPerson" in u.objectClass and not is_nil(u.employeeNumber) and
+            not is_nil(u.jpegPhoto),
+        select: %{cn: u.cn, uid: u.uid}
+      )
+
+    Enum.reduce(not_allowed, query, fn person, query ->
+      Ecto.Query.from(u in query, where: u.cn != ^person)
+    end)
   end
 
   def all_time_plays_for_user(player_id) do
-    Ecto.Query.from turn in __MODULE__,
-    where: turn.player_id == ^player_id
+    Ecto.Query.from(turn in __MODULE__,
+      where: turn.player_id == ^player_id
+    )
   end
 end

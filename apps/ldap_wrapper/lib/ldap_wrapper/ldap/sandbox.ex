@@ -20,17 +20,17 @@ defmodule LdapWrapper.Ldap.Sandbox do
   end
 
   def equalityMatch(type, value) do
-    send self(), {:equalityMatch, type, value}
+    send(self(), {:equalityMatch, type, value})
     {:equalityMatch, type, value}
   end
 
   def modify_password(_handle, dn, new_password) do
-    send self(), {:modify_password, dn, new_password}
+    send(self(), {:modify_password, dn, new_password})
     :ok
   end
 
   def modify_password(_handle, dn, new_password, old_password) do
-    send self(), {:modify_password, dn, new_password, old_password}
+    send(self(), {:modify_password, dn, new_password, old_password})
     :ok
   end
 
@@ -38,53 +38,99 @@ defmodule LdapWrapper.Ldap.Sandbox do
 
   def init([]) do
     fake_db = [
-      %{email: 'tom@example.com',
+      %{
+        email: 'tom@example.com',
         password: 'cattbutt',
         dn: 'uid=tom,ou=users,dc=example,dc=com',
-        ldap_search_result:
-        [{:eldap_entry,
-            'uid=tom,ou=users,dc=example,dc=com',
-            [{'uid', ['tom']},
-             {'objectClass',['inetOrgPerson', 'posixAccount', 'shadowAccount', 'organizationalPerson', 'person', 'top', 'orgPerson']},
+        ldap_search_result: [
+          {:eldap_entry, 'uid=tom,ou=users,dc=example,dc=com',
+           [
+             {'uid', ['tom']},
+             {'objectClass',
+              [
+                'inetOrgPerson',
+                'posixAccount',
+                'shadowAccount',
+                'organizationalPerson',
+                'person',
+                'top',
+                'orgPerson'
+              ]},
              {'mail', ['tom@example.com']}
-            ]
-        }]
+           ]}
+        ]
       },
-      %{email: 'jim@example.com',
-        password:  '12345678901234567890qwertyuioqwertyuio!🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀blastoffi have impossibly long passwords hahaha',
+      %{
+        email: 'jim@example.com',
+        password:
+          '12345678901234567890qwertyuioqwertyuio!🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀blastoffi have impossibly long passwords hahaha',
         dn: 'uid=jim,ou=users,dc=example,dc=com',
-        ldap_search_result:
-        [{:eldap_entry, 'uid=jim,ou=users,dc=example,dc=com',
-          [{'uid', ['jim']},
-           {'objectClass',['inetOrgPerson', 'posixAccount', 'shadowAccount', 'organizationalPerson','person', 'top', 'orgPerson']},
-           {'mail', ['jim@example.com']},
-           {'mobile', ['5035555555']}
-          ]
-        }]
+        ldap_search_result: [
+          {:eldap_entry, 'uid=jim,ou=users,dc=example,dc=com',
+           [
+             {'uid', ['jim']},
+             {'objectClass',
+              [
+                'inetOrgPerson',
+                'posixAccount',
+                'shadowAccount',
+                'organizationalPerson',
+                'person',
+                'top',
+                'orgPerson'
+              ]},
+             {'mail', ['jim@example.com']},
+             {'mobile', ['5035555555']}
+           ]}
+        ]
       },
-      %{email: 'jane@example.com',
-        password: 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg',
+      %{
+        email: 'jane@example.com',
+        password:
+          'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg',
         dn: 'uid=jane,ou=users,dc=example,dc=com',
-        ldap_search_result:
-          [{:eldap_entry, 'uid=jane,ou=users,dc=example,dc=com',
-            [{'uid', ['jane']},
-             {'objectClass', ['inetOrgPerson', 'posixAccount', 'shadowAccount', 'organizationalPerson', 'person', 'top', 'orgPerson']},
+        ldap_search_result: [
+          {:eldap_entry, 'uid=jane,ou=users,dc=example,dc=com',
+           [
+             {'uid', ['jane']},
+             {'objectClass',
+              [
+                'inetOrgPerson',
+                'posixAccount',
+                'shadowAccount',
+                'organizationalPerson',
+                'person',
+                'top',
+                'orgPerson'
+              ]},
              {'mail', ['jane@example.com']}
-             ]
-           }]
+           ]}
+        ]
       },
-      %{email: nil,
+      %{
+        email: nil,
         password: 'password',
         dn: 'cn=internal-password-reset,ou=service,ou=users,dc=example,dc=com',
-        ldap_search_result:
-          [{:eldap_entry, 'cn=internal-password-reset,ou=service,ou=users,dc=example,dc=com',
-            [{'uid', ['internal-password-reset']},
-             {'objectClass', ['inetOrgPerson', 'posixAccount', 'shadowAccount', 'organizationalPerson', 'person', 'top', 'orgPerson']},
+        ldap_search_result: [
+          {:eldap_entry, 'cn=internal-password-reset,ou=service,ou=users,dc=example,dc=com',
+           [
+             {'uid', ['internal-password-reset']},
+             {'objectClass',
+              [
+                'inetOrgPerson',
+                'posixAccount',
+                'shadowAccount',
+                'organizationalPerson',
+                'person',
+                'top',
+                'orgPerson'
+              ]},
              {'mail', []}
-             ]
-           }]
+           ]}
+        ]
       }
     ]
+
     {:ok, fake_db}
   end
 
@@ -104,7 +150,8 @@ defmodule LdapWrapper.Ldap.Sandbox do
         [%{email: ^email, ldap_search_result: ldap_search_result}] -> ldap_search_result
         _ -> []
       end
-    {:reply, {:ok, {:eldap_search_result, search_result, []}}, fake_db }
+
+    {:reply, {:ok, {:eldap_search_result, search_result, []}}, fake_db}
   end
 
   def handle_call(:close, _from, fake_db) do

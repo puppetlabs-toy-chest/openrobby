@@ -9,9 +9,8 @@ defmodule RobbyWeb.PageView do
 
   defp current_user_photo(uid, %RobbyWeb.User{username: username}) do
     case uid == username do
-      true  -> "#{:rand.uniform(1000)}"
+      true -> "#{:rand.uniform(1000)}"
       false -> ""
     end
   end
-
 end

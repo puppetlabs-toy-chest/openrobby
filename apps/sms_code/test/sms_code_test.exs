@@ -4,7 +4,13 @@ defmodule SmsCodeTest do
 
   test "send_reset packages a payload for Twilio" do
     SmsCode.Generator.send_reset("ABC123", "555-555-1212")
-    assert_received {:create, [to: "555-555-1212", from: "+5035551234", body: "Your password reset code is ABC123"]}
+
+    assert_received {:create,
+                     [
+                       to: "555-555-1212",
+                       from: "+5035551234",
+                       body: "Your password reset code is ABC123"
+                     ]}
   end
 
   test "the reset code gets put into cache" do
@@ -18,6 +24,6 @@ defmodule SmsCodeTest do
   end
 
   test "generate_code creates 6 random hex digits" do
-    assert Regex.match?(~r/\A[0-9A-F]{6}\Z/, SmsCode.Generator.generate_code)
+    assert Regex.match?(~r/\A[0-9A-F]{6}\Z/, SmsCode.Generator.generate_code())
   end
 end

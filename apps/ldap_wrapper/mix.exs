@@ -2,14 +2,16 @@ defmodule LdapWrapper.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :ldap_wrapper,
-     version: get_version(),
-     deps_path: "../../deps",
-     lockfile: "../../mix.lock",
-     elixir: "~> 1.0",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :ldap_wrapper,
+      version: get_version(),
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
+      elixir: "~> 1.0",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -42,7 +44,7 @@ defmodule LdapWrapper.Mixfile do
     [
       {:distillery, "~> 1.5", runtime: false},
       {:conform, "~> 2.0"},
-      {:erlware_commons, "~> 1.0"},
+      {:erlware_commons, "~> 1.0"}
     ]
   end
 end

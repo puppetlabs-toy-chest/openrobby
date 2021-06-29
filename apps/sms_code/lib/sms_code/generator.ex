@@ -3,7 +3,7 @@ defmodule SmsCode.Generator do
   use GenServer
 
   def start_link do
-    GenServer.start_link __MODULE__, [], name: __MODULE__
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
   def init(_) do
@@ -18,11 +18,10 @@ defmodule SmsCode.Generator do
     code == ConCache.get(:sms_code, id)
   end
 
-
   def handle_call({:send_new_code, id, mobile}, _from, state) do
     new_code = generate_code()
     {:ok, message} = send_reset(new_code, mobile)
-    Logger.debug "We got this from Twilio: #{inspect message}"
+    Logger.debug("We got this from Twilio: #{inspect(message)}")
     ConCache.put(:sms_code, id, new_code)
 
     {:reply, :ok, state}
@@ -34,12 +33,11 @@ defmodule SmsCode.Generator do
 
   def generate_code do
     :crypto.strong_rand_bytes(3)
-    |> Base.encode16
+    |> Base.encode16()
   end
 
   def send_reset(code, mobile) do
     payload = [to: mobile, from: "+15558675309", body: "Your password reset code is #{code}"]
     Module.concat(twilio_api(), Message).create(payload)
   end
-
 end

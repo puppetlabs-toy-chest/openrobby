@@ -7,8 +7,8 @@ defmodule LdapWrite do
     import Supervisor.Spec, warn: false
 
     children = [
-    #  # Define workers and child supervisors to be supervised
-    #   worker(LdapWrite.Worker, [], name: LdapWrite.Worker)
+      #  # Define workers and child supervisors to be supervised
+      #   worker(LdapWrite.Worker, [], name: LdapWrite.Worker)
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -16,5 +16,4 @@ defmodule LdapWrite do
     opts = [strategy: :one_for_one, name: LdapWrite.Supervisor]
     Supervisor.start_link(children, opts)
   end
-
 end

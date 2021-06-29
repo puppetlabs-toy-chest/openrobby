@@ -10,5 +10,4 @@ defmodule RobbyWeb.RoomChannelTest do
 
     {:ok, socket: socket}
   end
-
 end

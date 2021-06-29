@@ -199,7 +199,8 @@ See the moduledoc for `Conform.Schema.Validator` for more details and examples.
         "html",
         "json"
       ],
-      doc: "Provide documentation for robby_web.Elixir.RobbyWeb.Endpoint.render_errors.accepts here.",
+      doc:
+        "Provide documentation for robby_web.Elixir.RobbyWeb.Endpoint.render_errors.accepts here.",
       hidden: false,
       to: "robby_web.Elixir.RobbyWeb.Endpoint.render_errors.accepts"
     ],
@@ -255,7 +256,8 @@ See the moduledoc for `Conform.Schema.Validator` for more details and examples.
       commented: false,
       datatype: :binary,
       default: "priv/static/manifest.json",
-      doc: "Provide documentation for robby_web.Elixir.RobbyWeb.Endpoint.cache_static_manifest here.",
+      doc:
+        "Provide documentation for robby_web.Elixir.RobbyWeb.Endpoint.cache_static_manifest here.",
       hidden: false,
       to: "robby_web.Elixir.RobbyWeb.Endpoint.cache_static_manifest"
     ],
